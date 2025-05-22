@@ -1,5 +1,4 @@
 #include "graph_info.h"
-#include "token.h"
 #include "constants.h"
 
 GraphInfo::GraphInfo() {
@@ -48,4 +47,8 @@ void GraphInfo::set_x(float x_min, float x_max) {
 void GraphInfo::set_y(float y_min, float y_max) {
     _y_min = y_min;
     _y_max = y_max;
+}
+
+Queue<Token*>& GraphInfo::get_expression() {
+    return _q;
 }

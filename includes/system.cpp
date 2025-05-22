@@ -15,6 +15,14 @@ System::System(const vector<Particle>& p) {
     system = p;
 }
 
+System::System(GraphInfo* info) {
+    _graph = Graph(info);
+}
+
+void System::set_info(GraphInfo* info) {
+    _graph.set_info(info);
+}
+
 //------------------------------------------------------------------
 //------------------------------------------------------------------
 
@@ -26,8 +34,7 @@ void System::Step(int command) {
 
 void System::Draw(sf::RenderWindow &window)
 {
-    Plot p;
-    Graph g(p);
+    Graph g;
     g.Draw(window);
     // // window.clear(); // this clear is redundant, animate::render() already clears.
     // for(int i = 0; i < system.size(); i++) {

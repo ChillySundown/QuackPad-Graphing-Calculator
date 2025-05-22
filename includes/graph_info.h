@@ -3,7 +3,7 @@
 
 #include "graph.h"
 #include "plot.h"
-#include "token.h"
+#include "../includes/token/token.h"
 
 class GraphInfo {
     public:
@@ -20,6 +20,8 @@ class GraphInfo {
 
         void set_x(float x_min, float x_max);
         void set_y(float y_min, float y_max);
+
+        Queue<Token*>& get_expression();
         
     private:
         float _max_x_screen;

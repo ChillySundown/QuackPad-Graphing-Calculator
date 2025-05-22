@@ -5,11 +5,14 @@
 #include "sidebar.h"
 #include "system.h"
 #include "particle.h"
+#include "../includes/token/token.h"
+#include "graph_info.h"
 #include <string>
 
 class animate{
 public:
     animate();
+    ~animate();
     void run();
     void processEvents();
     void update();
@@ -24,6 +27,7 @@ private:
     sf::Text myTextLabel;               //text to draw on main screen
     bool mouseIn;                       //mouse is in the screen
     Sidebar sidebar;                    //rectangular message sidebar
+    GraphInfo* info;
 
 };
 

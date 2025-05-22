@@ -1,5 +1,6 @@
 #include "animate.h"
 #include "constants.h"
+#include "../includes/token/token.h"
 #include <iostream>
 
 animate::animate()
@@ -106,6 +107,9 @@ void animate::render()
     window.display();
 }
 
+animate::~animate() { //Destructor for GraphInfo pointer
+    delete info;
+}
 void animate::processEvents()
 {
     // sf::Event event;
