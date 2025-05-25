@@ -1,9 +1,10 @@
-#ifndef DARWICH_GRAPH_INFO
-#define DARWICH_GRAPH_INFO
+#ifndef DARWICH_GRAPH_INFO_H
+#define DARWICH_GRAPH_INFO_H
 
-#include "graph.h"
-#include "plot.h"
-#include "../includes/token/token.h"
+#include "queue/MyQueue.h"
+#include "token/token.h"
+#include <cstring>
+#include <SFML/Graphics.hpp>
 
 class GraphInfo {
     public:
@@ -24,6 +25,13 @@ class GraphInfo {
         Queue<Token*>& get_expression();
         
     private:
+        // string _equation;
+        // sf::Vector2f _window_dimensions;
+        // sf::Vector2f _origin;
+        // sf::Vector2f _scale;
+        // sf::Vector2f _domain;
+        // int _points;
+
         float _max_x_screen;
         float _max_y_screen;
         float _x_min;

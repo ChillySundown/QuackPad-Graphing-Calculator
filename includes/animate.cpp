@@ -1,6 +1,6 @@
 #include "animate.h"
 #include "constants.h"
-#include "../includes/token/token.h"
+#include "token/token.h"
 #include <iostream>
 
 animate::animate()
@@ -18,13 +18,13 @@ animate::animate()
     //   of objects created by the animate object.
     //   animate will
     // system = System(); // system is already default-constructed as a member
-    vector<Particle> container;
-    Random r;
-    int num_particles = r.Next(10, 40);
-    for(int i = 0; i < num_particles; i++) {
-        container.push_back(Particle());
-    }
-    system = System(container);
+    // vector<Particle> container;
+    // Random r;
+    // int num_particles = r.Next(10, 40);
+    // for(int i = 0; i < num_particles; i++) {
+    //     container.push_back(Particle());
+    // }
+    // system = System(container);
     window.setFramerateLimit(60);
 
     mouseIn = true;
@@ -86,7 +86,7 @@ void animate::Draw()
 void animate::update()
 {
     // cause changes to the data for the next frame
-    system.Step(command);
+    system.Step(command, nullptr); //REMINDER --- YOU NEED THIS! THIS SPECIFICALLY REMEMBER TO UNCOMMENT
     command = 0;
     if (mouseIn)
     {

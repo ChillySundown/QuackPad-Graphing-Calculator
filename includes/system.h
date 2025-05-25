@@ -3,6 +3,7 @@
 #include <vector>
 #include "particle.h"
 #include "graph_info.h"
+#include "graph.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
@@ -16,11 +17,11 @@ public:
 
     void set_info(GraphInfo* info);
 
-    void Step(int command);
+    void Step(int command, GraphInfo* g);
     int Size();
     void Draw(sf::RenderWindow& widnow);
 private:
-    vector<Particle> system;
+    vector<Particle> system; 
     Graph _graph;
 };
 

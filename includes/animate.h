@@ -5,7 +5,7 @@
 #include "sidebar.h"
 #include "system.h"
 #include "particle.h"
-#include "../includes/token/token.h"
+#include "token/token.h"
 #include "graph_info.h"
 #include <string>
 

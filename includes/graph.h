@@ -13,10 +13,13 @@ class Graph {
         Graph(GraphInfo* info);
 
         void set_info(GraphInfo* newInfo);
+        void update(GraphInfo g);
         void Draw(sf::RenderWindow& w);
 
     private:
         Plot _plot;
+        sf::RectangleShape x_axis;
+        sf::RectangleShape y_axis;
 };
 
 #endif

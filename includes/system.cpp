@@ -26,7 +26,8 @@ void System::set_info(GraphInfo* info) {
 //------------------------------------------------------------------
 //------------------------------------------------------------------
 
-void System::Step(int command) {
+
+void System::Step(int command, GraphInfo* g) {
     // for(int i = 0; i < system.size(); i++) {
     //     system[i].Step(command);
     // }

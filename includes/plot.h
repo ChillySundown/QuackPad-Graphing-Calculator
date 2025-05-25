@@ -20,9 +20,14 @@ class Plot {
 
         void set_info(GraphInfo* newInfo);
 
+        vector<sf::Vector2f> operator()();
+
         vector<sf::Vector2f>& get_points();
 
     private:
         vector<sf::Vector2f> _points;
+        // Queue<Token*> postfix;
+        // GraphInfo* info;
+
 };
 #endif

@@ -23,7 +23,7 @@ Particle::Particle() {
 
 Particle::Particle(sf::Vector2f pos) {
     _pos = pos;
-    _radius = 5.f;
+    _radius = 10.f;
     _fill_color = sf::Color(static_cast<uint32_t>(200), static_cast<uint32_t>(0), static_cast<uint32_t>(0));
 }
 
