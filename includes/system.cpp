@@ -6,20 +6,18 @@
 #include "plot.h"
 #include "graph.h"
 
+
 System::System()
 {
-    system = vector<Particle>();
+
 }
 
-System::System(const vector<Particle>& p) {
-    system = p;
-}
 
 System::System(GraphInfo* info) {
     _graph = Graph(info);
 }
 
-void System::set_info(GraphInfo* info) {
+void System::set_info(GraphInfo* info) { //Update does everything anyway.
     _graph.set_info(info);
 }
 
@@ -28,9 +26,7 @@ void System::set_info(GraphInfo* info) {
 
 
 void System::Step(int command, GraphInfo* g) {
-    // for(int i = 0; i < system.size(); i++) {
-    //     system[i].Step(command);
-    // }
+    //_graph.update(*g);
 }
 
 void System::Draw(sf::RenderWindow &window)
@@ -41,9 +37,4 @@ void System::Draw(sf::RenderWindow &window)
     // for(int i = 0; i < system.size(); i++) {
     //     system[i].Draw(window);
     // }
-}
-
-int System::Size()
-{
-    return system.size(); // Or 1 if it represents the single shape for now
 }

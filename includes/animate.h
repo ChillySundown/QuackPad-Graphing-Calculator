@@ -18,6 +18,7 @@ public:
     void update();
     void render();
     void Draw();
+    void Step(int command, GraphInfo* g);
 private:
     sf::RenderWindow window;
     sf::CircleShape mousePoint;         //The little red dot

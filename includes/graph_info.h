@@ -22,6 +22,8 @@ class GraphInfo {
         void set_x(float x_min, float x_max);
         void set_y(float y_min, float y_max);
 
+        int getNumPoints();
+
         Queue<Token*>& get_expression();
         
     private:
@@ -30,7 +32,7 @@ class GraphInfo {
         // sf::Vector2f _origin;
         // sf::Vector2f _scale;
         // sf::Vector2f _domain;
-        // int _points;
+        int _points;
 
         float _max_x_screen;
         float _max_y_screen;
@@ -39,5 +41,7 @@ class GraphInfo {
         float _y_min;
         float _y_max;
         Queue<Token*> _q;
+
+        Queue<Token*> tokenizer(string _equation);
 };
 #endif

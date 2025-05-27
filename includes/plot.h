@@ -18,7 +18,7 @@ class Plot {
 
         void translate();
 
-        void set_info(GraphInfo* newInfo);
+        void set_info(GraphInfo newInfo);
 
         vector<sf::Vector2f> operator()();
 

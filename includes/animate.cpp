@@ -27,6 +27,10 @@ animate::animate()
     // system = System(container);
     window.setFramerateLimit(60);
 
+    //Our goat GraphInfo!!!
+
+    //info = new GraphInfo();
+
     mouseIn = true;
 
     mousePoint = sf::CircleShape(); // default constructed, then set properties

@@ -9,6 +9,11 @@ GraphInfo::GraphInfo() {
     _y_min = -10;
     _y_max = 10;
 
+    // _window_dimensions = sf::Vector2f(600.f, 600.f);
+    // _origin = sf::Vector2f(300.f, 300.f);
+    // _domain = sf::Vector2f(-5.f, 5.f);
+    // _equation = "x";
+
 }
 
 GraphInfo::GraphInfo(float x_screen, float y_screen, float x_min, float x_max, float y_min, float y_max, Queue<Token*> q) {
@@ -40,6 +45,10 @@ float GraphInfo::get_y_max() {
     return _y_max;
 }
 
+int GraphInfo::getNumPoints() {
+    return _points;
+}
+
 void GraphInfo::set_x(float x_min, float x_max) {
     _x_min = x_min;
     _x_max = x_max;
@@ -48,6 +57,12 @@ void GraphInfo::set_y(float y_min, float y_max) {
     _y_min = y_min;
     _y_max = y_max;
 }
+
+// Queue<Token*> GraphInfo::tokenizer(string expression) {
+//     while(!expression.empty()) {
+//     }
+//     return Queue<Token*>();
+// }
 
 Queue<Token*>& GraphInfo::get_expression() {
     return _q;
