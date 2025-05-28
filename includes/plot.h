@@ -16,7 +16,7 @@ class Plot {
 
         Plot(GraphInfo* info);
 
-        void translate();
+        sf::Vector2f translate(sf::Vector2f& _point);
 
         void set_info(GraphInfo* info);
 

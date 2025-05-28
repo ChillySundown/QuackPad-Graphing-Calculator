@@ -12,7 +12,7 @@ Plot::Plot(int xmin, int xmax, Queue<Token*>& t) {
         r.set_input(post);
         _points.push_back(sf::Vector2f(i, r(i)));
     }
-    translate();
+    //translate();
 }
 
 Plot::Plot(GraphInfo* info) {
@@ -29,9 +29,10 @@ vector<sf::Vector2f> Plot::operator()() {
     float inc = (x_max - x_min) / numPoints;
     for(float i = x_min; i <= x_max; i += inc) {
         r.set_input(post);
-        _points.push_back(sf::Vector2f(i, r(i)));
+        sf::Vector2f pre_translate = sf::Vector2f(i, r(i));
+        _points.push_back(translate(pre_translate));
     }
-    translate();
+    //translate();
     return _points;
 }
 
@@ -50,10 +51,20 @@ void Plot::set_info(GraphInfo* info) { //Takes the new graph information and plo
     // translate();
 }
 
-void Plot::translate() {
-    for(int i = 0; i < _points.size(); i++) {
-        _points[i] = sf::Vector2f(10* _points[i].x + 300, 300 - (10 * _points[i].y));
+sf::Vector2f Plot::translate(sf::Vector2f& _point) {
+    float x_min = _info->get_x_min();
+    float x_max = _info->get_x_max();
+    int numPoints = _info->getNumPoints();
+
+    float new_x, new_y;
+
+    new_y = 300 - _point.y;
+    if(x_min < 0)
+        new_x = numPoints * (_point.x - x_min);
+    else {
+         new_x = _point.x + (600 - x_max);
     }
+    return sf::Vector2f(new_x, new_y);
 } 
 
 vector<sf::Vector2f>& Plot::get_points() {
