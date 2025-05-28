@@ -18,7 +18,7 @@ class Plot {
 
         void translate();
 
-        void set_info(GraphInfo newInfo);
+        void set_info(GraphInfo* info);
 
         vector<sf::Vector2f> operator()();
 
@@ -27,7 +27,7 @@ class Plot {
     private:
         vector<sf::Vector2f> _points;
         // Queue<Token*> postfix;
-        // GraphInfo* info;
+        // GraphInfo* info; //REMINDER YOU NEED A GraphInfo at EVERY LEVEL!!! Use It In Constructor!!!
 
 };
 #endif

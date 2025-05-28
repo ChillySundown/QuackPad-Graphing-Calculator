@@ -8,7 +8,7 @@ animate::animate()
 {
     cout << "animate CTOR: TOP" << endl;
     // SFML 3: VideoMode constructor takes sf::Vector2u or {unsigned int, unsigned int}
-    window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "SFML window!");
+    window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "ACME Graphing Calculator");
     // VideoMode class has functions to detect screen size etc.
     // RenderWindow constructor has a third argumnet to set style
     // of the window: resize, fullscreen etc.
@@ -28,8 +28,9 @@ animate::animate()
     window.setFramerateLimit(60);
 
     //Our goat GraphInfo!!!
-
-    //info = new GraphInfo();
+    info = new GraphInfo();
+    //system = System(info); Makes the x axis disappear for some reason;
+    //cout << "What a pain!";
 
     mouseIn = true;
 
@@ -73,7 +74,6 @@ void animate::Draw()
     {
         window.draw(mousePoint);
     }
-
     sidebar.draw(window);
 
     //- - - - - - - - - - - - - - - - - - -
@@ -90,7 +90,7 @@ void animate::Draw()
 void animate::update()
 {
     // cause changes to the data for the next frame
-    system.Step(command, nullptr); //REMINDER --- YOU NEED THIS! THIS SPECIFICALLY REMEMBER TO UNCOMMENT
+    system.Step(command, info); //REMINDER --- YOU NEED THIS! THIS SPECIFICALLY REMEMBER TO UNCOMMENT
     command = 0;
     if (mouseIn)
     {
@@ -103,6 +103,7 @@ void animate::update()
         // mouse location text for sidebar:
         sidebar[SB_MOUSE_POSITION] = mouse_pos_string(window);
     }
+
 }
 void animate::render()
 {

@@ -34,13 +34,13 @@ vector<sf::Vector2f> Plot::operator()() {
     return _points;
 }
 
-void Plot::set_info(GraphInfo info) { //Takes the new graph information and plots the points in the emptied vector
-    ShuntingYard s(info.get_expression());
+void Plot::set_info(GraphInfo* info) { //Takes the new graph information and plots the points in the emptied vector
+    ShuntingYard s(info->get_expression());
     _points.clear(); //Clears vector before pushing new coords
     Queue<Token*> post = s.postfix();
     RPN y;
-    float inc = (info.get_x_max() - info.get_x_min()) / info.getNumPoints();
-    for(float x = info.get_x_min(); x <= info.get_x_max(); x += inc) {
+    float inc = (info->get_x_max() - info->get_x_min()) / info->getNumPoints();
+    for(float x = info->get_x_min(); x <= info->get_x_max(); x += inc) {
         y.set_input(post);
         _points.push_back(sf::Vector2f(x, y(x)));
     }

@@ -21,6 +21,9 @@ class GraphInfo {
 
         void set_x(float x_min, float x_max);
         void set_y(float y_min, float y_max);
+        void setNumPoints(int num);
+        void setEquation(string eq);
+        void setEquation(Queue<Token*>& t);
 
         int getNumPoints();
 

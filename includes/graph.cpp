@@ -37,7 +37,7 @@ void Graph::set_info(GraphInfo* g) {
     cout << "Busy doing nothing :/";
 }
 
-void Graph::update(GraphInfo g) {
+void Graph::update(GraphInfo* g) {
     _plot.set_info(g);
 }
 

@@ -1,6 +1,6 @@
 #include "graph_info.h"
 #include "constants.h"
-
+#include "token/function.h"
 GraphInfo::GraphInfo() {
     _max_x_screen = SCREEN_WIDTH;
     _max_y_screen = SCREEN_HEIGHT;
@@ -8,7 +8,7 @@ GraphInfo::GraphInfo() {
     _x_max = 10;
     _y_min = -10;
     _y_max = 10;
-
+    _q.push(new Function("x"));
     // _window_dimensions = sf::Vector2f(600.f, 600.f);
     // _origin = sf::Vector2f(300.f, 300.f);
     // _domain = sf::Vector2f(-5.f, 5.f);
@@ -57,6 +57,7 @@ void GraphInfo::set_y(float y_min, float y_max) {
     _y_min = y_min;
     _y_max = y_max;
 }
+
 
 // Queue<Token*> GraphInfo::tokenizer(string expression) {
 //     while(!expression.empty()) {

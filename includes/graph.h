@@ -13,7 +13,7 @@ class Graph {
         Graph(GraphInfo* info);
 
         void set_info(GraphInfo* newInfo); //Do we need this?
-        void update(GraphInfo g);
+        void update(GraphInfo* g);
         void Draw(sf::RenderWindow& w);
 
     private:

@@ -26,13 +26,13 @@ void System::set_info(GraphInfo* info) { //Update does everything anyway.
 
 
 void System::Step(int command, GraphInfo* g) {
-    //_graph.update(*g);
+    //set_info(g);
+    _graph.update(g);
 }
 
 void System::Draw(sf::RenderWindow &window)
 {
-    Graph g;
-    g.Draw(window);
+    _graph.Draw(window);
     // // window.clear(); // this clear is redundant, animate::render() already clears.
     // for(int i = 0; i < system.size(); i++) {
     //     system[i].Draw(window);
