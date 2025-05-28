@@ -4,11 +4,12 @@
 GraphInfo::GraphInfo() {
     _max_x_screen = SCREEN_WIDTH;
     _max_y_screen = SCREEN_HEIGHT;
-    _x_min = -10;
-    _x_max = 10;
-    _y_min = -10;
-    _y_max = 10;
+    _x_min = -5;
+    _x_max = 5;
+    _y_min = -5;
+    _y_max = 5;
     _q.push(new Function("x"));
+    _points = 10;
     // _window_dimensions = sf::Vector2f(600.f, 600.f);
     // _origin = sf::Vector2f(300.f, 300.f);
     // _domain = sf::Vector2f(-5.f, 5.f);

@@ -75,7 +75,6 @@ void animate::Draw()
         window.draw(mousePoint);
     }
     sidebar.draw(window);
-
     //- - - - - - - - - - - - - - - - - - -
     // getPosition() gives you screen coords, getPosition(window) gives you window coords
     // cout<<"mosue pos: "<<sf::Mouse::getPosition(window).x<<", "<<sf::Mouse::getPosition(window).y<<endl;
@@ -103,6 +102,7 @@ void animate::update()
         // mouse location text for sidebar:
         sidebar[SB_MOUSE_POSITION] = mouse_pos_string(window);
     }
+    //info->set_x(0, 10); //WE CAN NOW DYNAMICALLY ALTER THE GRAPH!!!
 
 }
 void animate::render()

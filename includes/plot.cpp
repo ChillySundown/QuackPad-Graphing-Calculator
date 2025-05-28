@@ -20,13 +20,14 @@ Plot::Plot(GraphInfo* info) {
 }
 
 vector<sf::Vector2f> Plot::operator()() {
-    Queue<Token*> s;
-    s.push(new Function("x"));
-    ShuntingYard yard(s);
+    ShuntingYard yard(_info->get_expression());
     Queue<Token*> post = yard.postfix();
     RPN r;
-    float inc = (5.f - -5.f) / 11;
-    for(float i = -5.f; i <= 5.f; i += inc) {
+    float x_max = _info->get_x_max();
+    float x_min = _info->get_x_min();
+    int numPoints = _info->getNumPoints();
+    float inc = (x_max - x_min) / numPoints;
+    for(float i = x_min; i <= x_max; i += inc) {
         r.set_input(post);
         _points.push_back(sf::Vector2f(i, r(i)));
     }
@@ -35,16 +36,18 @@ vector<sf::Vector2f> Plot::operator()() {
 }
 
 void Plot::set_info(GraphInfo* info) { //Takes the new graph information and plots the points in the emptied vector
-    ShuntingYard s(info->get_expression());
-    _points.clear(); //Clears vector before pushing new coords
-    Queue<Token*> post = s.postfix();
-    RPN y;
-    float inc = (info->get_x_max() - info->get_x_min()) / info->getNumPoints();
-    for(float x = info->get_x_min(); x <= info->get_x_max(); x += inc) {
-        y.set_input(post);
-        _points.push_back(sf::Vector2f(x, y(x)));
-    }
-    translate();
+    _info = info;
+    _points.clear();
+    // ShuntingYard s(info->get_expression());
+    // _points.clear(); //Clears vector before pushing new coords
+    // Queue<Token*> post = s.postfix();
+    // RPN y;
+    // float inc = (info->get_x_max() - info->get_x_min()) / info->getNumPoints();
+    // for(float x = info->get_x_min(); x <= info->get_x_max(); x += inc) {
+    //     y.set_input(post);
+    //     _points.push_back(sf::Vector2f(x, y(x)));
+    // }
+    // translate();
 }
 
 void Plot::translate() {

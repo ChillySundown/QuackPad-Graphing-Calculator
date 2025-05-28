@@ -27,7 +27,7 @@ class Plot {
     private:
         vector<sf::Vector2f> _points;
         // Queue<Token*> postfix;
-        // GraphInfo* info; //REMINDER YOU NEED A GraphInfo at EVERY LEVEL!!! Use It In Constructor!!!
+        GraphInfo* _info; //REMINDER YOU NEED A GraphInfo at EVERY LEVEL!!! Use It In Constructor!!!
 
 };
 #endif
