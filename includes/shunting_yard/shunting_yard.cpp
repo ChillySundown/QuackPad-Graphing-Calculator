@@ -46,7 +46,7 @@ Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
     Queue<Token*> post = Queue<Token*>();
     while(!my_queue.empty()) {
         Token* current = my_queue.pop();
-        if(current->typeOf() == INTEGER || current->typeOf() == FUNCTION) { //If stuff gets weird, probably this
+        if(current->typeOf() == INTEGER /*|| current->typeOf() == FUNCTION*/) { //If stuff gets weird, probably this
             post.push(current);
         }
         else { //What about FUNCTION?

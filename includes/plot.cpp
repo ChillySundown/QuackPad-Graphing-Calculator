@@ -61,7 +61,7 @@ sf::Vector2f Plot::translate(sf::Vector2f& _point) {
     float x_interval = 600 / (_info->get_x_max() - _info->get_x_min());
     float y_interval = 600 / (_info->get_y_max() - _info->get_y_min());
 
-    new_y = ((600 /*+ _info->get_y_min()*/) - (y_interval * _point.y)) - 300;
+    new_y = 300- (y_interval * _point.y);
     new_x =  (x_interval) * (_point.x - x_min);
 
     // if(_point.y < 0) {

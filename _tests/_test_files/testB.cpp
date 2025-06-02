@@ -41,6 +41,23 @@ bool test_complex_trig_functions(bool debug = false) {
   if(result == sin(3)) {
     return true;
   }
+
+  t = Queue<Token*>();
+  t.push(new Function("sin"));
+  t.push(new LeftParen());
+  t.push(new Integer(1));
+  t.push(new Operator("-"));
+  t.push(new Function("tan"));
+  t.push(new LeftParen());
+  t.push(new Function("x"));
+  t.push(new RightParen());
+  t.push(new RightParen());
+
+  r.set_input(s.postfix(t));
+  double result2 = r.calculate(2.2);
+  if(result2 == sin(1-tan(2.2))) {
+    return true;
+  }
   return false;
 }
 

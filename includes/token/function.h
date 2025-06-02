@@ -4,11 +4,12 @@
 #include <iostream>
 #include <cassert>
 #include "token.h"
+#include "operator.h"
 #include <cmath>
 #include <cstring>
 
 using namespace std;
-class Function : public Token {
+class Function : public Operator {
     public:
         Function();
 

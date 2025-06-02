@@ -4,11 +4,11 @@
 #include "function.h"
 #include "token.h"
 
-Function::Function() : Token(), my_fun("") {
+Function::Function() : Operator(), my_fun("") {
 
 }
 
-Function::Function(string f) : Token(), my_fun(f) {
+Function::Function(string f) : Operator(f), my_fun(f) {
 
 }
 
