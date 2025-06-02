@@ -29,5 +29,6 @@ class ShuntingYard {
         Queue<Token*> my_queue;
         void operator_protocol(Queue<Token*>& q, Stack<Token*>& s, Token* t);
         void paren_protocol(Queue<Token*>& q, Stack<Token*>& s, Token* t);
+        void function_protocol(Queue<Token*>& q, Stack<Token*>& s, Token* t);
 };
 #endif

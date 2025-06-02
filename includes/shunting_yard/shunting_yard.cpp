@@ -31,6 +31,12 @@ void ShuntingYard::paren_protocol(Queue<Token*>& q, Stack<Token*>& s, Token* t) 
         s.pop(); //Removes LEFT PAREN FROM STACK -- CHECK BACK HERE IF SEGMENTATION FAULTS
 }
 
+void ShuntingYard::function_protocol(Queue<Token*>& q, Stack<Token*>& s, Token* t) {
+    Function* o = static_cast<Function*>(t);
+    s.push(o);
+    cout << "is this a problem?" << endl;
+}
+
 void ShuntingYard::infix(Queue<Token*>& q) {
     my_queue = q;
 }
@@ -40,7 +46,7 @@ Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
     Queue<Token*> post = Queue<Token*>();
     while(!my_queue.empty()) {
         Token* current = my_queue.pop();
-        if(current->typeOf() == INTEGER || current->typeOf() == FUNCTION) {
+        if(current->typeOf() == INTEGER || current->typeOf() == FUNCTION) { //If stuff gets weird, probably this
             post.push(current);
         }
         else { //What about FUNCTION?
@@ -50,14 +56,21 @@ Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
             else if(current->typeOf() == OPERATOR) {
                 operator_protocol(post, operators, current);
             }
+            // else if(current->typeOf() == FUNCTION){ //This wasn't working
+            //     function_protocol(post, operators, current);
+            //     //operators.push(current);
+            // }
             else {
                 operators.push(current);
             }
         }
+        //scout << my_queue << endl;
     }
     while(!operators.empty()) {
-        post.push(operators.pop());
+        Token* popped = operators.pop();
+        post.push(popped);
     }
+    //cout << post << endl;
     return post;
 }
 

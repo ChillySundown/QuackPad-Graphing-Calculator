@@ -36,6 +36,7 @@ double RPN::calculate(double x) {
                 math_stack.push(val); //Pushes the new value to the math stack
             }
         }
+        //cout << math_stack << endl;
     }
     return math_stack.pop();
 }

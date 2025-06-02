@@ -1,6 +1,16 @@
 #include "gtest/gtest.h"
 #include <iostream>
 #include <iomanip>
+#include "../../includes/queue/MyQueue.h"
+#include "../../includes/shunting_yard/shunting_yard.h"
+#include "../../includes/rpn/rpn.h"
+#include "../../includes/token/token.h"
+#include "../../includes/token/function.h"
+#include "../../includes/token/integer.h"
+#include "../../includes/token/operator.h"
+#include "../../includes/token/rightparen.h"
+#include "../../includes/token/leftparen.h"
+
 using namespace std;
 
 bool test_stub(bool debug = false)
@@ -11,6 +21,29 @@ bool test_stub(bool debug = false)
   return true;
 }
 
+bool test_complex_trig_functions(bool debug = false) {
+  if(debug) {
+    cout << "testB:: testing_trig_functions() entering test_trig_functions" << endl;
+  }
+
+  ShuntingYard s;
+  RPN r;
+  Queue<Token*> t;
+
+  t.push(new Function("sin"));
+  t.push(new Function("x"));
+
+  Queue<Token*> post = s.postfix(t);
+  cout << "Post: " << post << endl;
+  r.set_input(post);
+  double result = r.calculate(3);
+  cout << result << endl;
+  if(result == sin(3)) {
+    return true;
+  }
+  return false;
+}
+
 TEST(TEST_STUB, TestStub) {
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
@@ -18,6 +51,9 @@ TEST(TEST_STUB, TestStub) {
   EXPECT_EQ(1, test_stub(false));
 }
 
+TEST(TEST_RPM_SHUNTING_YARD, TestComplexTrigFunctions) {
+  EXPECT_EQ(1, test_complex_trig_functions(false));
+}
 
 
 
