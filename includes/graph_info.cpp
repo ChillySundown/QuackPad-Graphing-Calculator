@@ -91,14 +91,15 @@ void str_spacer(string& s) {
     for(int i = 0; i < s.size()-1; i++) {
         char c1 = s.at(i);
         char c2 = s.at(i+1);
-        if(!bothLetters(c1, c2)) {
+        if(!bothNumbers(c1, c2) && !bothLetters(c1, c2) && c1 != '.' && c2 != '.') {
             s.insert(i+1, " ");
             i++;
         }
-        else if(/*c1 != '.' && c2 != '.' &&*/ !bothNumbers(c1, c2)) {
-            s.insert(i+1, " ");
-            i++;
-        }
+        // else 
+        // else {
+        //     s.insert(i+1, " ");
+        //     i++;
+        // }
         cout << s << endl;
     }
 }

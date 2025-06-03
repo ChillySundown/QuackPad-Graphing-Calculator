@@ -63,6 +63,9 @@ bool test_complex_trig_functions(bool debug = false) {
 }
 
 bool test_str_spacer(bool debug = false) {
+  if(!bothNumbers('6', '8') || !bothNumbers('2', '0') || bothNumbers('(', '1')) {
+    return false;
+  }
   if(debug) {
     cout << "testB:: test_str_space - entering test_str_spacer" << endl;
   }
