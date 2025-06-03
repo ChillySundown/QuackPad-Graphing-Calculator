@@ -23,7 +23,9 @@ public:
 
     void ZoomOut(GraphInfo* g);
 
-    void Pan(GraphInfo* g);
+    void PanLeft(GraphInfo* g);
+    
+    void PanRight(GraphInfo* g);
     
     //int Size();
     void Draw(sf::RenderWindow& widnow);

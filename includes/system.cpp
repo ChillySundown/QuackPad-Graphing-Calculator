@@ -25,19 +25,45 @@ void System::set_info(GraphInfo* info) { //Update does everything anyway.
 //------------------------------------------------------------------
 
 void System::ZoomIn(GraphInfo* g) {
-    float new_x_min = g->get_x_min() + 2;
+    float new_x_min = g->get_x_min() / 2.f;
+    float new_x_max = g->get_x_max() / 2.f;
+
+    float new_y_min = g->get_y_min() / 2.f;
+    float new_y_max = g->get_y_max() / 2.f;
+
+    g->set_x(new_x_min, new_x_max);
+    g->set_y(new_y_min, new_y_max);
+}
+
+void System::ZoomOut(GraphInfo* g) {
+    float new_x_min = g->get_x_min() * 2;
+    float new_x_max = g->get_x_max() * 2;
+
+    float new_y_min = g->get_y_min() * 2;
+    float new_y_max = g->get_y_max() * 2;
+
+    g->set_x(new_x_min, new_x_max);
+    g->set_y(new_y_min, new_y_max);
+}
+
+void System::PanLeft(GraphInfo* g) {
+    float new_x_min = g->get_x_min() - 2;
     float new_x_max = g->get_x_max() - 2;
 
-    float new_y_min = g->get_y_min() + 2;
-    float new_y_max = g->get_y_max() - 2;
+    g->set_x(new_x_min, new_x_max);
+}
 
-    //g->set_x()
+void System::PanRight(GraphInfo* g) {
+    float new_x_min = g->get_x_min() + 2;
+    float new_x_max = g->get_x_max() + 2;
+
+    g->set_x(new_x_min, new_x_max);
 }
 
 void System::Step(int command, GraphInfo* g) {
     //set_info(g);
-    if(command == 1) {
-        //zoom(g);
+    if(command == 6) {
+        //zoomOut(g);
     }
     _graph.update(g);
 }

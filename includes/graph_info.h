@@ -6,6 +6,10 @@
 #include <cstring>
 #include <SFML/Graphics.hpp>
 
+
+void str_spacer(string& s);
+bool bothNumbers(char c1, char c2);
+bool bothLetters(char c1, char c2);
 class GraphInfo {
     public:
         GraphInfo();
@@ -44,7 +48,6 @@ class GraphInfo {
         float _y_min;
         float _y_max;
         Queue<Token*> _q;
-
         Queue<Token*> tokenizer(string _equation);
 };
 #endif

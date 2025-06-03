@@ -1,23 +1,23 @@
 #include "graph_info.h"
 #include "constants.h"
+#include "../includes/stack/MyStack.h"
+#include "../includes/queue/MyQueue.h"
+#include "token/token.h"
 #include "token/function.h"
 #include "token/integer.h"
 #include "token/operator.h"
 #include "token/leftparen.h"
 #include "token/rightparen.h"
-GraphInfo::GraphInfo() {
+GraphInfo::GraphInfo() { //You need to make polar coords
     _max_x_screen = SCREEN_WIDTH;
     _max_y_screen = SCREEN_HEIGHT;
     _x_min = -10;
     _x_max = 10;
     _y_min = -10;
     _y_max = 10;
-    _q.push(new Function("cos"));
-    _q.push(new LeftParen());
     _q.push(new Function("sin"));
     _q.push(new LeftParen());
     _q.push(new Function("x"));
-    _q.push(new RightParen());
     _q.push(new RightParen());
     _points = 300;
     // _window_dimensions = sf::Vector2f(600.f, 600.f);
@@ -69,12 +69,64 @@ void GraphInfo::set_y(float y_min, float y_max) {
     _y_max = y_max;
 }
 
+bool bothNumbers(char c1, char c2) {
+    char c1Val = c1 - 48;
+    char c2Val = c2 - 48;
+    if(c1Val >= 0 && c1Val <= 9 && c2Val >= 0 && c2Val <= 9) {
+        return true;
+    }
+    return false;
+}
 
-// Queue<Token*> GraphInfo::tokenizer(string expression) {
-//     while(!expression.empty()) {
-//     }
-//     return Queue<Token*>();
-// }
+bool bothLetters(char c1, char c2) {
+    char c1Val = c1 - 97;
+    char c2Val = c2 - 97;
+    if(c1Val >= 0 && c1Val <= 25 && c2Val >= 0 && c2Val <= 25) {
+        return true;
+    }
+    return false;
+}
+
+void str_spacer(string& s) {
+    for(int i = 0; i < s.size()-1; i++) {
+        char c1 = s.at(i);
+        char c2 = s.at(i+1);
+        if(!bothLetters(c1, c2)) {
+            s.insert(i+1, " ");
+            i++;
+        }
+        else if(/*c1 != '.' && c2 != '.' &&*/ !bothNumbers(c1, c2)) {
+            s.insert(i+1, " ");
+            i++;
+        }
+        cout << s << endl;
+    }
+}
+
+//PRECONDITION: EXPRESSION HAS BEEN SPACED OUT
+Queue<Token*> GraphInfo::tokenizer(string expression) {
+    Stack<Token*> token_stack;
+    // while(!expression.empty()) {
+    //     char popped = expression.back(); //What about decimals????
+    //     if(popped < 10) {
+    //         token_stack.push(new Integer(popped));
+    //     }
+    //     else {
+    //         string only_char;
+    //         only_char += popped;
+    //         if(popped == '+' || popped == '-' || popped == '/' || popped == '^') {
+    //             token_stack.push(new Operator(only_char));
+    //         }
+    //         else if(popped == '(') {
+    //             token_stack.push(new LeftParen());
+    //         }
+    //         else if(popped == ')') {
+    //             token_stack.push(new RightParen());
+    //         }
+    //     }
+    // }
+    return Queue<Token*>();
+}
 
 Queue<Token*>& GraphInfo::get_expression() {
     return _q;
