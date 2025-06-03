@@ -26,7 +26,7 @@ vector<sf::Vector2f> Plot::operator()() {
     float x_max = _info->get_x_max();
     float x_min = _info->get_x_min();
     int numPoints = _info->getNumPoints();
-    float inc = (x_max - x_min) / numPoints;
+    float inc = (x_max - x_min) / (numPoints-1);
     for(float i = x_min; i <= x_max; i += inc) {
         r.set_input(post);
         sf::Vector2f pre_translate = sf::Vector2f(i, r(i));
@@ -61,8 +61,8 @@ sf::Vector2f Plot::translate(sf::Vector2f& _point) {
     float x_interval = 600 / (_info->get_x_max() - _info->get_x_min());
     float y_interval = 600 / (_info->get_y_max() - _info->get_y_min());
 
-    new_y = 300- (y_interval * _point.y);
-    new_x =  (x_interval) * (_point.x - x_min);
+    new_y = 300- (y_interval * _point.y) - 3.f;
+    new_x =  (x_interval) * (_point.x - x_min) - 3.f;
 
     // if(_point.y < 0) {
     //     new_y = (600 + _info->get_y_min()) - (60 * _point.y);    
@@ -77,7 +77,6 @@ sf::Vector2f Plot::translate(sf::Vector2f& _point) {
     // else {
     //      new_x = _point.x + (600 - x_max);
     // }
-    //cout << new_x << ", " << new_y << endl;
     return sf::Vector2f(new_x, new_y);
 } 
 

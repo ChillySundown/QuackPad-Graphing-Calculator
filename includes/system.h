@@ -18,6 +18,13 @@ public:
     void set_info(GraphInfo* info);
 
     void Step(int command, GraphInfo* g);
+
+    void ZoomIn(GraphInfo* g);
+
+    void ZoomOut(GraphInfo* g);
+
+    void Pan(GraphInfo* g);
+    
     //int Size();
     void Draw(sf::RenderWindow& widnow);
 private:

@@ -3,15 +3,22 @@
 #include "token/function.h"
 #include "token/integer.h"
 #include "token/operator.h"
+#include "token/leftparen.h"
+#include "token/rightparen.h"
 GraphInfo::GraphInfo() {
     _max_x_screen = SCREEN_WIDTH;
     _max_y_screen = SCREEN_HEIGHT;
-    _x_min = -5;
-    _x_max = 5;
-    _y_min = -5;
-    _y_max = 5;
+    _x_min = -10;
+    _x_max = 10;
+    _y_min = -10;
+    _y_max = 10;
+    _q.push(new Function("cos"));
+    _q.push(new LeftParen());
+    _q.push(new Function("sin"));
+    _q.push(new LeftParen());
     _q.push(new Function("x"));
-
+    _q.push(new RightParen());
+    _q.push(new RightParen());
     _points = 300;
     // _window_dimensions = sf::Vector2f(600.f, 600.f);
     // _origin = sf::Vector2f(300.f, 300.f);
