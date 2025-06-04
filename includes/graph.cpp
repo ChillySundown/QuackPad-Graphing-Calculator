@@ -5,10 +5,10 @@ using namespace std;
 
 Graph::Graph() {
     _plot = Plot();
-    x_axis = sf::RectangleShape(sf::Vector2f(600.f, 1.f));
-    y_axis = sf::RectangleShape(sf::Vector2f(1.f, 600.f));
-    x_axis.setPosition(sf::Vector2f(0.f, 300.f));
-    y_axis.setPosition(sf::Vector2f(300.f, 0.f));
+    x_axis = sf::RectangleShape(sf::Vector2f(WORK_PANEL, 1.f));
+    y_axis = sf::RectangleShape(sf::Vector2f(1.f, SCREEN_HEIGHT));
+    x_axis.setPosition(sf::Vector2f(0.f, SCREEN_HEIGHT / 2));
+    y_axis.setPosition(sf::Vector2f(WORK_PANEL /2, 0.f));
     x_axis.setFillColor(sf::Color::White);
     y_axis.setFillColor(sf::Color::White);
 }

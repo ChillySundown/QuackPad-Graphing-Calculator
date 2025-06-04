@@ -1,4 +1,5 @@
 #include "plot.h"
+#include "constants.h"
 
 Plot::Plot() { //Currently using for all testing
 
@@ -62,10 +63,10 @@ sf::Vector2f Plot::translate(sf::Vector2f& _point) {
 
     float new_x, new_y;
 
-    float x_interval = 600 / (_info->get_x_max() - _info->get_x_min());
-    float y_interval = 600 / (_info->get_y_max() - _info->get_y_min());
+    float x_interval = WORK_PANEL / (_info->get_x_max() - _info->get_x_min());
+    float y_interval = SCREEN_HEIGHT / (_info->get_y_max() - _info->get_y_min());
 
-    new_y = 300- (y_interval * _point.y) - 1.f;
+    new_y = (SCREEN_HEIGHT / 2) - (y_interval * _point.y) - 1.f;
     new_x =  (x_interval) * (_point.x - x_min) - 1.f;
 
     // if(_point.y < 0) {
