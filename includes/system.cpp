@@ -74,6 +74,11 @@ void System::Step(int command, GraphInfo* g) {
     if(command == 9) {
         ZoomOut(g);
     }
+    if(command == 2) {
+        string eq;
+        cin >> eq;
+        g->setEquation(eq);
+    }
     _graph.update(g);
 }
 

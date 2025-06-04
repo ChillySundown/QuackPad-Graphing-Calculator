@@ -159,6 +159,7 @@ void GraphInfo::setEquation(string eq) {
     Queue<Token*> t = tokenizer(eq);
     //cout << t << endl;
     _q = t;
+    cout << "Everything lives" << endl;
 }
 
 Queue<Token*>& GraphInfo::get_expression() {

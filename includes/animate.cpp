@@ -160,7 +160,7 @@ void animate::processEvents()
                 command = 9;
                 system.Step(command, info);
                 break;
-            default:
+            default: //For equation input, process it in another function (Crashes when in processEvents)
                 break;
             }
         } 
