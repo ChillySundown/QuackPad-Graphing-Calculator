@@ -100,13 +100,27 @@ void str_spacer(string& s) {
         //     s.insert(i+1, " ");
         //     i++;
         // }
-        cout << s << endl;
+        //cout << s << endl;
     }
 }
 
 //PRECONDITION: EXPRESSION HAS BEEN SPACED OUT
 Queue<Token*> GraphInfo::tokenizer(string expression) {
     Stack<Token*> token_stack;
+    str_spacer(expression);
+    int i = 0;
+    string strToken;
+
+    char* exp = new char[expression.size()+1];
+    strcpy(exp, expression.c_str());
+
+    char* tokens = strtok(exp, " ");
+    while(tokens != NULL) {
+        strToken = string(tokens);
+        
+    }
+
+    }
     // while(!expression.empty()) {
     //     char popped = expression.back(); //What about decimals????
     //     if(popped < 10) {

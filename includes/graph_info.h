@@ -6,6 +6,7 @@
 #include <cstring>
 #include <SFML/Graphics.hpp>
 
+using namespace std;
 
 void str_spacer(string& s);
 bool bothNumbers(char c1, char c2);
