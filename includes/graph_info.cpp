@@ -11,10 +11,10 @@
 GraphInfo::GraphInfo() { //You need to make polar coords
     _max_x_screen = SCREEN_WIDTH;
     _max_y_screen = SCREEN_HEIGHT;
-    _x_min = -10;
-    _x_max = 10;
-    _y_min = -10;
-    _y_max = 10;
+    _x_min = -5;
+    _x_max = 5;
+    _y_min = -5;
+    _y_max = 5;
     _q.push(new Function("sin"));
     _q.push(new LeftParen());
     _q.push(new Function("x"));
@@ -106,7 +106,7 @@ void str_spacer(string& s) {
 
 //PRECONDITION: EXPRESSION HAS BEEN SPACED OUT
 Queue<Token*> GraphInfo::tokenizer(string expression) {
-    Stack<Token*> token_stack;
+    Queue<Token*> token_queue;
     str_spacer(expression);
     int i = 0;
     string strToken;
@@ -117,30 +117,49 @@ Queue<Token*> GraphInfo::tokenizer(string expression) {
     char* tokens = strtok(exp, " ");
     while(tokens != NULL) {
         strToken = string(tokens);
-        
+        if(strToken == "x" || strToken == "sin" || strToken == "cos" || strToken == "tan" || strToken == "arccos" || strToken == "arcsin" || strToken == "arctan") {
+            token_queue.push(new Function(strToken));
+        }
+        else if(strToken == "+" || strToken == "-" || strToken == "*" || strToken == "/" || strToken == "^") {
+            token_queue.push(new Operator(strToken));
+        }
+        else if(strToken == "(") {
+            token_queue.push(new LeftParen());
+        }
+        else if(strToken == ")") {
+            token_queue.push(new RightParen());
+        }
+        else {
+            token_queue.push(new Integer(stof(strToken)));
+        }
+        tokens = strtok(NULL, " ");
     }
-
-    }
+    return token_queue;
     // while(!expression.empty()) {
     //     char popped = expression.back(); //What about decimals????
     //     if(popped < 10) {
-    //         token_stack.push(new Integer(popped));
+    //         token_queue.push(new Integer(popped));
     //     }
     //     else {
     //         string only_char;
     //         only_char += popped;
     //         if(popped == '+' || popped == '-' || popped == '/' || popped == '^') {
-    //             token_stack.push(new Operator(only_char));
+    //             token_queue.push(new Operator(only_char));
     //         }
     //         else if(popped == '(') {
-    //             token_stack.push(new LeftParen());
+    //             token_queue.push(new LeftParen());
     //         }
     //         else if(popped == ')') {
-    //             token_stack.push(new RightParen());
+    //             token_queue.push(new RightParen());
     //         }
     //     }
     // }
-    return Queue<Token*>();
+}
+
+void GraphInfo::setEquation(string eq) {
+    Queue<Token*> t = tokenizer(eq);
+    //cout << t << endl;
+    _q = t;
 }
 
 Queue<Token*>& GraphInfo::get_expression() {

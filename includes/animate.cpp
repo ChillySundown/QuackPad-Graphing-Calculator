@@ -124,6 +124,10 @@ void animate::processEvents()
     {
         sf::Event event = *optEvent; // get the event from the optional
 
+        /*****
+         For text input, use the TextEntered event, and only append characters that have a unicode under 128
+         ******/
+
         // check the type of the event...
         if (event.is<sf::Event::Closed>())
         {
@@ -136,19 +140,30 @@ void animate::processEvents()
             case sf::Keyboard::Key::Left: // SFML 3: sf::Keyboard::Key::Left
                 sidebar[SB_KEY_PRESSED] = "LEFT ARROW";
                 command = 4;
+                system.Step(command, info);
                 break;
             case sf::Keyboard::Key::Right: // SFML 3: sf::Keyboard::Key::Right
                 sidebar[SB_KEY_PRESSED] = "RIGHT ARROW";
                 command = 6;
+                system.Step(command, info);
                 break;
             case sf::Keyboard::Key::Escape: // SFML 3: sf::Keyboard::Key::Escape
                 sidebar[SB_KEY_PRESSED] = "ESC: EXIT";
                 window.close();
                 break;
+            case sf::Keyboard::Key::Equal: //Zooms into the graph
+                command = 8;
+                cout << "Zoom key pressed" << endl;
+                system.Step(command, info);
+                break;
+            case sf::Keyboard::Key::Hyphen:
+                command = 9;
+                system.Step(command, info);
+                break;
             default:
                 break;
             }
-        }
+        } 
         else if (event.is<sf::Event::MouseEntered>())
         {
             mouseIn = true;

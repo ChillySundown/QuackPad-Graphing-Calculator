@@ -94,6 +94,18 @@ bool test_str_spacer(bool debug = false) {
   return true;
 }
 
+bool test_str_to_equation(bool debug = false) {
+  if(debug) {
+    cout << "testB:: test_str_to_equation - entering test_str_to_equation";
+  }
+  GraphInfo g;
+  g.setEquation("x^2");
+  g.setEquation("sin(x)");
+  g.setEquation("1-tan(2*x+5/8*cos(6*x))");
+
+  return true;
+}
+
 TEST(TEST_STUB, TestStub) {
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
@@ -105,8 +117,12 @@ TEST(TEST_RPM_SHUNTING_YARD, TestComplexTrigFunctions) {
   EXPECT_EQ(1, test_complex_trig_functions(false));
 }
 
-TEST(TEST_STR_SPACER, TestStrSpacer) {
+TEST(TEST_GRAPH_INFO, TestStrSpacer) {
   EXPECT_EQ(1, test_str_spacer(false));
+}
+
+TEST(TEST_GRAPH_INFO, TestStrToEquation) {
+  EXPECT_EQ(1, test_str_to_equation(false));
 }
 
 int main(int argc, char **argv) {
