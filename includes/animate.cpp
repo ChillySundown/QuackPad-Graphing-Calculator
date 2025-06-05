@@ -118,6 +118,7 @@ animate::~animate() { //Destructor for GraphInfo pointer
 
 void animate::processEvents()
 {
+    string input;
     // sf::Event event;
     float mouseX, mouseY;
     // SFML 3: pollEvent returns std::optional<sf::Event>
@@ -137,7 +138,8 @@ void animate::processEvents()
         }
         else if(const auto textEntered = event.getIf<sf::Event::TextEntered>()) {
             if(textEntered->unicode < 128) {
-             cout << "Typed: " << static_cast<char>(textEntered->unicode) << endl;
+             input += static_cast<char>(textEntered->unicode);
+             cout << input << endl;
             }
         }
         else if (const sf::Event::KeyPressed* keyPressed = event.getIf<sf::Event::KeyPressed>())

@@ -38,7 +38,9 @@ double RPN::calculate(double x) {
         }
         //cout << math_stack << endl;
     }
-    return math_stack.pop();
+    double top = math_stack.pop();
+    cout << top << endl;
+    return top;
 }
 
 double RPN::operator()(double x) {

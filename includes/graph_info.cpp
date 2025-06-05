@@ -15,9 +15,14 @@ GraphInfo::GraphInfo() { //You need to make polar coords
     _x_max = 5;
     _y_min = -5;
     _y_max = 5;
-    _q.push(new Integer(1));
-    _q.push(new Operator("/"));
+    _q.push(new LeftParen());
+    _q.push(new Function("sin"));
+    _q.push(new LeftParen());
     _q.push(new Function("x"));
+    _q.push(new RightParen());
+    _q.push(new RightParen());
+    _q.push(new Operator("^"));
+    _q.push(new Integer(2));
     _points = 300;
     // _window_dimensions = sf::Vector2f(600.f, 600.f);
     // _origin = sf::Vector2f(300.f, 300.f);

@@ -3,6 +3,7 @@
 #include <cassert>
 #include "function.h"
 #include "token.h"
+#include <cmath>
 
 Function::Function() : Operator(), my_fun("") {
 
@@ -25,6 +26,18 @@ double Function::eval(double e) { //May not work for sin, cos, etc; Just used to
     }
     else if(my_fun == "tan") {
         return tan(e);
+    }
+    else if(my_fun == "arccos") {
+        return acos(e);
+    }
+    else if(my_fun == "arcsin") {
+        return asin(e);
+    }
+    else if(my_fun == "arctan") {
+        return atan(e);
+    }
+    else if(my_fun == "pi") {
+        return 4 * atan(1);
     }
     else {
         return e;

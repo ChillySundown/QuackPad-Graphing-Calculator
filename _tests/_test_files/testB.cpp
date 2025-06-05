@@ -31,35 +31,38 @@ bool test_complex_trig_functions(bool debug = false) {
   RPN r;
   Queue<Token*> t;
 
-  t.push(new Function("sin"));
+  t.push(new Function("cos"));
   t.push(new Function("x"));
 
   Queue<Token*> post = s.postfix(t);
-  cout << "Post: " << post << endl;
   r.set_input(post);
   double result = r.calculate(3);
-  cout << result << endl;
-  if(result == sin(3)) {
-    return true;
+  if(result != cos(3)) {
+    return false;
   }
 
-  t = Queue<Token*>();
-  t.push(new Function("sin"));
-  t.push(new LeftParen());
-  t.push(new Integer(1));
-  t.push(new Operator("-"));
-  t.push(new Function("tan"));
-  t.push(new LeftParen());
-  t.push(new Function("x"));
-  t.push(new RightParen());
-  t.push(new RightParen());
+  Queue<Token*> t2;
+  t2.push(new Function("sin"));
+  t2.push(new LeftParen());
+  t2.push(new Integer(1));
+  t2.push(new Operator("-"));
+  t2.push(new Function("tan"));
+  t2.push(new LeftParen());
+  t2.push(new Function("x"));
+  t2.push(new RightParen());
+  t2.push(new RightParen());
 
-  r.set_input(s.postfix(t));
+  cout << "Complex Trig postfix:" << endl;
+  Queue<Token*> post2 = s.postfix(t2);
+  r.set_input(post2);
+  cout << post2 << endl;
+  
   double result2 = r.calculate(2.2);
-  if(result2 == sin(1-tan(2.2))) {
-    return true;
+  cout << result2 << endl;
+  if(result2 != sin(1-tan(2.2))) {
+    return false;
   }
-  return false;
+  return true;
 }
 
 bool test_str_spacer(bool debug = false) {

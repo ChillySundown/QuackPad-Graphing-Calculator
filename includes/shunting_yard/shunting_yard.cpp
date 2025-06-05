@@ -42,8 +42,8 @@ void ShuntingYard::infix(Queue<Token*>& q) {
 }
 
 Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
-    Stack<Token*> operators = Stack<Token*>();
-    Queue<Token*> post = Queue<Token*>();
+    Stack<Token*> operators;
+    Queue<Token*> post;
     while(!my_queue.empty()) {
         Token* current = my_queue.pop();
         if(current->typeOf() == INTEGER /*|| current->typeOf() == FUNCTION*/) { //If stuff gets weird, probably this
@@ -64,13 +64,11 @@ Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
                 operators.push(current);
             }
         }
-        //scout << my_queue << endl;
     }
     while(!operators.empty()) {
         Token* popped = operators.pop();
         post.push(popped);
     }
-    //cout << post << endl;
     return post;
 }
 
