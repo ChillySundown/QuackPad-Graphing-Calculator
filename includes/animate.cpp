@@ -205,7 +205,6 @@ void animate::run()
     while (window.isOpen())
     {
         processEvents();
-        textInput();
         update();
         render(); // clear/draw/display
     }
