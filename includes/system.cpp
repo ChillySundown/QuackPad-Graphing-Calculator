@@ -25,22 +25,22 @@ void System::set_info(GraphInfo* info) { //Update does everything anyway.
 //------------------------------------------------------------------
 
 void System::ZoomIn(GraphInfo* g) {
-    float new_x_min = g->get_x_min() + 2.f;
-    float new_x_max = g->get_x_max() - 2.f;
+    float new_x_min = g->get_x_min() + 0.8f;
+    float new_x_max = g->get_x_max() - 0.8f;
 
-    float new_y_min = g->get_y_min() + 2.f;
-    float new_y_max = g->get_y_max() - 2.f;
+    float new_y_min = g->get_y_min() + 0.8f;
+    float new_y_max = g->get_y_max() - 0.8f;
 
     g->set_x(new_x_min, new_x_max);
     g->set_y(new_y_min, new_y_max);
 }
 
 void System::ZoomOut(GraphInfo* g) {
-    float new_x_min = g->get_x_min() - 2.f;
-    float new_x_max = g->get_x_max() + 2.f;
+    float new_x_min = g->get_x_min() - 0.8f;
+    float new_x_max = g->get_x_max() + 0.8f;
 
-    float new_y_min = g->get_y_min() - 2.f;
-    float new_y_max = g->get_y_max() + 2.f;
+    float new_y_min = g->get_y_min() - 0.8f;
+    float new_y_max = g->get_y_max() + 0.8f;
 
     g->set_x(new_x_min, new_x_max);
     g->set_y(new_y_min, new_y_max);
@@ -75,9 +75,10 @@ void System::Step(int command, GraphInfo* g) {
         ZoomOut(g);
     }
     if(command == 2) {
-        string eq;
-        cin >> eq;
-        g->setEquation(eq);
+        cout << "yeah!";
+        // string eq;
+        // cin >> eq;
+        //g->setEquation(eq);
     }
     _graph.update(g);
 }

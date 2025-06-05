@@ -115,6 +115,7 @@ void animate::render()
 animate::~animate() { //Destructor for GraphInfo pointer
     delete info;
 }
+
 void animate::processEvents()
 {
     // sf::Event event;
@@ -123,6 +124,7 @@ void animate::processEvents()
     while (auto optEvent = window.pollEvent())
     {
         sf::Event event = *optEvent; // get the event from the optional
+        
 
         /*****
          For text input, use the TextEntered event, and only append characters that have a unicode under 128
@@ -132,6 +134,11 @@ void animate::processEvents()
         if (event.is<sf::Event::Closed>())
         {
             window.close();
+        }
+        else if(const auto textEntered = event.getIf<sf::Event::TextEntered>()) {
+            if(textEntered->unicode < 128) {
+             cout << "Typed: " << static_cast<char>(textEntered->unicode) << endl;
+            }
         }
         else if (const sf::Event::KeyPressed* keyPressed = event.getIf<sf::Event::KeyPressed>())
         {
@@ -153,7 +160,6 @@ void animate::processEvents()
                 break;
             case sf::Keyboard::Key::Equal: //Zooms into the graph
                 command = 8;
-                cout << "Zoom key pressed" << endl;
                 system.Step(command, info);
                 break;
             case sf::Keyboard::Key::Hyphen:
@@ -199,6 +205,7 @@ void animate::run()
     while (window.isOpen())
     {
         processEvents();
+        textInput();
         update();
         render(); // clear/draw/display
     }
