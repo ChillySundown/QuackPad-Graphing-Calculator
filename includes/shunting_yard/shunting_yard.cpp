@@ -44,6 +44,7 @@ void ShuntingYard::infix(Queue<Token*>& q) {
 Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
     Stack<Token*> operators;
     Queue<Token*> post;
+    Token* prev = nullptr;
     while(!my_queue.empty()) {
         Token* current = my_queue.pop();
         if(current->typeOf() == INTEGER /*|| current->typeOf() == FUNCTION*/) { //If stuff gets weird, probably this
@@ -54,11 +55,11 @@ Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
                 paren_protocol(post, operators, current);
             }
             else if(current->typeOf() == OPERATOR) {
-                if(operators.empty() && post.empty() && static_cast<Operator*>(current)->getVal() == MINUS) { //If stack and queue is empty, we know it's a urnary op
+                if(operators.empty() && post.empty() && static_cast<Operator*>(current)->getVal() == MINUS) { //If stack and queue is empty, we know it's a unary op
                     operators.push(new Operator("u-"));
                 }
-                else if(!operators.empty() && static_cast<Operator*>(current)->getVal() == MINUS && (operators.top()->typeOf() == OPERATOR || operators.top()->typeOf() == LEFT_PAREN)) {
-                    operators.push(new Operator("u-")); //If stack is NOT empty, we need to check for previous token to deterimine if its urnary
+                else if(prev != nullptr && static_cast<Operator*>(current)->getVal() == MINUS && (prev->typeOf() == OPERATOR || prev->typeOf() == LEFT_PAREN)) {
+                    operators.push(new Operator("u-")); //If stack and queue are NOT empty, we need to check for previous token to deterimine if its unary
                 }
                 else {
                     operator_protocol(post, operators, current);
@@ -72,6 +73,7 @@ Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
                 operators.push(current);
             }
         }
+        prev = current;
     }
     while(!operators.empty()) {
         Token* popped = operators.pop();

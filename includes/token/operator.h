@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum OPS {PLUS, MINUS = 0, MULTIPLY = 1, DIVIDE = 1, EXPONENT = 2, NEGATE = 3};
+enum OPS {NEGATE, PLUS=1, MINUS = 1, MULTIPLY = 2, DIVIDE = 2, EXPONENT = 3};
 class Operator : public Token {
     public:
         Operator();

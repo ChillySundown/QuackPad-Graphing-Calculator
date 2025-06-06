@@ -17,7 +17,7 @@ class RPN {
     public:
         RPN();
         
-        RPN(Queue<Token*> q);
+        RPN(Queue<Token*>& q);
 
         void set_input(Queue<Token*> q);
 

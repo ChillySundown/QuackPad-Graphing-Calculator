@@ -30,7 +30,7 @@ Operator::Operator(string op) {
         specific_op = EXPONENT;
     }
     else if(op == "u-") {
-        specific_op == NEGATE;
+        specific_op = NEGATE;
     }
     else {
         specific_op = 4; //Hidden Modulus operator??

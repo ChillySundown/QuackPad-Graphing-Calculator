@@ -20,6 +20,8 @@ class Function : public Operator {
         double eval(double e);
 
         virtual void printToken();
+        
+        string getFun();
 
         friend ostream& operator<<(ostream& outs, Function f);
 

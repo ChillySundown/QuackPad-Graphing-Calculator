@@ -6,17 +6,17 @@
 using namespace std;
 
 RPN::RPN() {
-    
+
 }
 
-RPN::RPN(Queue<Token*> q) {
+RPN::RPN(Queue<Token*>& q) {
     postfix = q;
     math_stack = Stack<double>();
 }
 
 void RPN::set_input(Queue<Token*> q) {
     postfix = q;
-    
+    math_stack = Stack<double>();
 }
 
 double RPN::calculate(double x) {
@@ -27,7 +27,11 @@ double RPN::calculate(double x) {
         }
         else {
             if(current->typeOf() == FUNCTION) {
-                math_stack.push(static_cast<Function*>(current)->eval(x));
+                double val = x;
+                if(!math_stack.empty() && static_cast<Function*>(current)->getFun() != "x") { //X is an input variable, so it should always be equal to input
+                    val = math_stack.pop(); //This sets other functions, like trig, to the top number in the stack.
+                }
+                math_stack.push(static_cast<Function*>(current)->eval(val));
             }
             else if(current->typeOf() == OPERATOR) {
                 if(static_cast<Operator*>(current)->getVal() == NEGATE) {
@@ -42,7 +46,6 @@ double RPN::calculate(double x) {
                 }
             }
         }
-        cout << math_stack << endl;
     }
     double top = math_stack.pop();
     //cout << top << endl;

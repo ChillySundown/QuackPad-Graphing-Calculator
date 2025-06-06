@@ -127,8 +127,18 @@ bool test_shunting_yard_rpn(bool debug = false) {
   Queue<Token*> eq1_post = post.postfix(eq1);
   cout << eq1_post << endl;
 
- double result1 = solver.calculate(0);
- if(result1 != 4.0) {
+  Queue<Token*> eq2;
+  eq2.push(new Operator("-"));
+  eq2.push(new Function("x"));
+  eq2.push(new Operator("^"));
+  eq2.push(new Integer(2));
+
+  Queue<Token*> eq2_post = post.postfix(eq2);
+  cout << eq2_post << endl;
+  solver.set_input(eq2_post);
+ double result2 = solver.calculate(3);
+ cout << "Result2: " << result2 << endl;
+ if(result2 != -9.0) {
     return false;
  }
   return true;
@@ -139,6 +149,10 @@ TEST(TEST_STUB, TestStub) {
   //EXPECT_EQ(0, <your individual test functions are called here>);
 
   EXPECT_EQ(1, test_stub(false));
+}
+
+TEST(TEST_RPN_SHUNTING_YARD, TestRpmShuntingYard) {
+  EXPECT_EQ(1, test_shunting_yard_rpn(false));
 }
 
 TEST(TEST_RPM_SHUNTING_YARD, TestComplexTrigFunctions) {
@@ -153,9 +167,6 @@ TEST(TEST_GRAPH_INFO, TestStrToEquation) {
   EXPECT_EQ(1, test_str_to_equation(false));
 }
 
-TEST(TEST_RPN_SHUNTING_YARD, TestRpmShuntingYard) {
-  EXPECT_EQ(1, test_shunting_yard_rpn(false));
-}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

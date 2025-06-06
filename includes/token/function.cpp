@@ -44,6 +44,10 @@ double Function::eval(double e) { //May not work for sin, cos, etc; Just used to
     }
 }
 
+string Function::getFun() {
+    return my_fun;
+}
+
 void Function::printToken() {
     cout << my_fun;
 }
