@@ -15,12 +15,8 @@ GraphInfo::GraphInfo() { //You need to make polar coords
     _x_max = 5;
     _y_min = -5;
     _y_max = 5;
-    _q.push(new LeftParen());
-    _q.push(new Function("sin"));
-    _q.push(new LeftParen());
+    //_q.push(new Operator("-"));
     _q.push(new Function("x"));
-    _q.push(new RightParen());
-    _q.push(new RightParen());
     _q.push(new Operator("^"));
     _q.push(new Integer(2));
     _points = 300;

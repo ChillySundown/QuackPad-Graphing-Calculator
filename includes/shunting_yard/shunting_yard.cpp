@@ -54,7 +54,15 @@ Queue<Token*> ShuntingYard::postfix(Queue<Token*>& my_queue) {
                 paren_protocol(post, operators, current);
             }
             else if(current->typeOf() == OPERATOR) {
-                operator_protocol(post, operators, current);
+                if(operators.empty() && post.empty() && static_cast<Operator*>(current)->getVal() == MINUS) { //If stack and queue is empty, we know it's a urnary op
+                    operators.push(new Operator("u-"));
+                }
+                else if(!operators.empty() && static_cast<Operator*>(current)->getVal() == MINUS && (operators.top()->typeOf() == OPERATOR || operators.top()->typeOf() == LEFT_PAREN)) {
+                    operators.push(new Operator("u-")); //If stack is NOT empty, we need to check for previous token to deterimine if its urnary
+                }
+                else {
+                    operator_protocol(post, operators, current);
+                }
             }
             // else if(current->typeOf() == FUNCTION){ //This wasn't working
             //     function_protocol(post, operators, current);

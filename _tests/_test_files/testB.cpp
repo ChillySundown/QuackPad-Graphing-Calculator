@@ -99,7 +99,7 @@ bool test_str_spacer(bool debug = false) {
 
 bool test_str_to_equation(bool debug = false) {
   if(debug) {
-    cout << "testB:: test_str_to_equation - entering test_str_to_equation";
+    cout << "testB:: test_str_to_equation - entering test_str_to_equation" << endl;
   }
   GraphInfo g;
   g.setEquation("x^2");
@@ -109,6 +109,31 @@ bool test_str_to_equation(bool debug = false) {
   return true;
 }
 
+bool test_shunting_yard_rpn(bool debug = false) {
+  if(debug) {
+    cout << "testB:: test_shunting_yard_rpn - entering test_shunting_yard_rpn" << endl;
+  }
+
+  ShuntingYard post;
+  Queue<Token*> eq1;
+
+  RPN solver;
+
+  eq1.push(new Integer(1));
+  eq1.push(new Operator("-"));
+  eq1.push(new Operator("-"));
+  eq1.push(new Integer(3));
+
+  Queue<Token*> eq1_post = post.postfix(eq1);
+  cout << eq1_post << endl;
+
+ double result1 = solver.calculate(0);
+ if(result1 != 4.0) {
+    return false;
+ }
+  return true;
+}
+ 
 TEST(TEST_STUB, TestStub) {
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
@@ -126,6 +151,10 @@ TEST(TEST_GRAPH_INFO, TestStrSpacer) {
 
 TEST(TEST_GRAPH_INFO, TestStrToEquation) {
   EXPECT_EQ(1, test_str_to_equation(false));
+}
+
+TEST(TEST_RPN_SHUNTING_YARD, TestRpmShuntingYard) {
+  EXPECT_EQ(1, test_shunting_yard_rpn(false));
 }
 
 int main(int argc, char **argv) {

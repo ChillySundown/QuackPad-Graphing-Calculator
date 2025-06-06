@@ -30,16 +30,22 @@ double RPN::calculate(double x) {
                 math_stack.push(static_cast<Function*>(current)->eval(x));
             }
             else if(current->typeOf() == OPERATOR) {
-                double second = math_stack.pop();
-                double first = math_stack.pop();
-                double val = static_cast<Operator*>(current)->evaluate(first, second); //Returns value of operation done on first & second
-                math_stack.push(val); //Pushes the new value to the math stack
+                if(static_cast<Operator*>(current)->getVal() == NEGATE) {
+                    double negative = -1 * math_stack.pop(); 
+                    math_stack.push(negative);
+                }
+                else {
+                    double second = math_stack.pop();
+                    double first = math_stack.pop();
+                    double val = static_cast<Operator*>(current)->evaluate(first, second); //Returns value of operation done on first & second
+                    math_stack.push(val); //Pushes the new value to the math stack
+                }
             }
         }
-        //cout << math_stack << endl;
+        cout << math_stack << endl;
     }
     double top = math_stack.pop();
-    cout << top << endl;
+    //cout << top << endl;
     return top;
 }
 

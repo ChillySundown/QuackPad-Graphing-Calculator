@@ -29,8 +29,11 @@ Operator::Operator(string op) {
     else if(op == "^") {
         specific_op = EXPONENT;
     }
+    else if(op == "u-") {
+        specific_op == NEGATE;
+    }
     else {
-        specific_op = 3; //Hidden Modulus operator??
+        specific_op = 4; //Hidden Modulus operator??
     }
 }
 
