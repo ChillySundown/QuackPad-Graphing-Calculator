@@ -29,7 +29,7 @@ animate::animate()
     window.setFramerateLimit(60);
 
     textBox.setSize(sf::Vector2f(SIDE_BAR, 30.f));
-    textBox.setFillColor(sf::Color::Transparent);
+    textBox.setFillColor(sf::Color::Green);
     textBox.setPosition(sf::Vector2f(SCREEN_WIDTH - 300, SCREEN_HEIGHT - 30.f));
 
     //Our goat GraphInfo!!!
@@ -64,11 +64,11 @@ animate::animate()
     // myTextLabel = sf::Text("Initial String for myTextLabel", font); // This was assignment + wrong constructor
     myTextLabel.setString("ACME Graphing Calculator");
     // myTextLabel.setFont(font); // Redundant, already constructed with font
-    myTextLabel.setCharacterSize(20);
+    myTextLabel.setCharacterSize(25);
     myTextLabel.setStyle(sf::Text::Style::Bold); // SFML 3: sf::Text::Style::Bold
     myTextLabel.setFillColor(sf::Color::Black);
     // assuming .height is correct for SFML 3. Use .f for float literals.
-    myTextLabel.setPosition(sf::Vector2f(SCREEN_WIDTH - SIDE_BAR, SCREEN_HEIGHT - myTextLabel.getLocalBounds().size.y - 5.f));
+    myTextLabel.setPosition(textBox.getPosition());
     cout << "animate instantiated successfully." << endl;
 }
 
@@ -179,16 +179,24 @@ void animate::processEvents()
                 break;
                 //system.Step(command, info);
             case sf::Keyboard::Key::Enter:
+                history.open("history.txt", ios::app);
+                if(history.fail()) {
+                    cout << "WAHHHHEIIUH HOWCOULDYOUUU" << endl;
+                    exit(1);
+                }
                 command = 5;
                 cout << "Submitted!" << endl;
                 try {
                     info->setEquation(input);
+                    history << input << "\n";
                     input = "";
+
                     info->setInputStatus(false);
                     textBox.setFillColor(sf::Color::Transparent);
                 } catch(exception e) {
                     input = "Invalid equation";
                 }
+                history.close();
                 break;
             default: //For equation input, process it in another function (Crashes when in processEvents)
                 break;

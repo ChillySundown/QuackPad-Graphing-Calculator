@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <cstdlib>
 using namespace std;
 
 
@@ -19,6 +21,7 @@ private:
     vector<string> items;               //strings to place on the sidebar
     sf::Font font;                      //used to draw text // Ensure declared before sb_text
     sf::Text sb_text;                   //used to draw strings on the window object
+    ifstream history;
 
     float _left;
     float _width;

@@ -1,6 +1,7 @@
 #include "sidebar.h"
 #include "constants.h" // For SCREEN_HEIGHT
 #include <iostream>   // Included via sidebar.h but good practice
+#include <fstream>
 
 Sidebar::Sidebar()
     : font(), sb_text(font), _left(0.f), _width(0.f) // initialize sb_text, provide defaults for _left, _width
@@ -23,8 +24,14 @@ Sidebar::Sidebar(float left, float width)
     cout << "Sidebar CTOR: TOP" << endl;
     items.reserve(50);
 
+    history.open("history.txt");
+    if(history.fail()) {
+        cout << "FAILURE IMMINENT" << endl;
+        exit(1);
+    }
+
     // set up the sidebar rectangle:
-    rect.setFillColor(sf::Color(105, 105, 105)); //(192,192,192)); //silver
+    rect.setFillColor(sf::Color(192, 192, 192)); //(192,192,192)); //silver
     rect.setPosition(sf::Vector2f(left, 0));
     rect.setSize(sf::Vector2f(width, SCREEN_HEIGHT));
     cout << "Sidebar CTOR: about to load font." << endl;
@@ -58,7 +65,11 @@ Sidebar::Sidebar(float left, float width)
     // Fill the items vector with empty strings so that we can use [] to read them:
     for (int i = 0; i < 30; i++)
     {
-        items.push_back("");
+        string eq;
+        history >> eq;
+        if(eq != "") {
+            items.push_back(eq);
+        }
     }
     cout << "Sidebar: CTOR: Exit." << endl;
 }

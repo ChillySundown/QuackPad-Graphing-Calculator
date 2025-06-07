@@ -7,6 +7,8 @@
 #include "particle.h"
 #include "token/token.h"
 #include "graph_info.h"
+#include <fstream>
+#include <cstdlib>
 #include <string>
 
 class animate{
@@ -27,10 +29,11 @@ private:
     sf::Font font;                      //font to draw on main screen
     sf::Text myTextLabel;               //text to draw on main screen
     bool mouseIn;                       //mouse is in the screen
-    Sidebar sidebar;                    //rectangular message sidebar
     sf::RectangleShape textBox;
+    Sidebar sidebar;                    //rectangular message sidebar
     GraphInfo* info;
     string input;
+    ofstream history;
 
 };
 
