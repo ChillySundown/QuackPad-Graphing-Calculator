@@ -15,15 +15,8 @@ GraphInfo::GraphInfo() { //You need to make polar coords
     _x_max = 5;
     _y_min = -5;
     _y_max = 5;
-  _q.push(new Function("sin"));
-  _q.push(new LeftParen());
-  _q.push(new Integer(1));
-  _q.push(new Operator("-"));
-  _q.push(new Function("tan"));
-  _q.push(new LeftParen());
-  _q.push(new Function("x"));
-  _q.push(new RightParen());
-  _q.push(new RightParen());
+    _q = tokenizer("arccos(sin(3*pi*(x^2-8)))");
+    cout << "Tokenized queue = " << _q << endl;
     _points = 300;
     // _window_dimensions = sf::Vector2f(600.f, 600.f);
     // _origin = sf::Vector2f(300.f, 300.f);
@@ -122,7 +115,7 @@ Queue<Token*> GraphInfo::tokenizer(string expression) {
     char* tokens = strtok(exp, " ");
     while(tokens != NULL) {
         strToken = string(tokens);
-        if(strToken == "x" || strToken == "sin" || strToken == "cos" || strToken == "tan" || strToken == "arccos" || strToken == "arcsin" || strToken == "arctan") {
+        if(strToken == "x" || strToken == "sin" || strToken == "cos" || strToken == "tan" || strToken == "arccos" || strToken == "arcsin" || strToken == "arctan" || strToken == "pi") {
             token_queue.push(new Function(strToken));
         }
         else if(strToken == "+" || strToken == "-" || strToken == "*" || strToken == "/" || strToken == "^") {

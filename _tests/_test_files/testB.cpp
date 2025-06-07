@@ -56,6 +56,18 @@ bool test_complex_trig_functions(bool debug = false) {
   Queue<Token*> post2 = s.postfix(t2);
   r.set_input(post2);
   cout << post2 << endl;
+
+  Queue<Token*> t3;
+  t3.push(new Function("cos"));
+  t3.push(new LeftParen());
+  t3.push(new Integer(4));
+  t3.push(new Operator("-"));
+  t3.push(new Function("pi"));
+  t3.push(new Operator("*"));
+  t3.push(new Function("x"));
+  t3.push(new RightParen());
+
+  cout << s.postfix(t3) << endl;
   
   double result2 = r.calculate(2.2);
   cout << result2 << endl;

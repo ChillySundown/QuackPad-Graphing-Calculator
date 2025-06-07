@@ -28,7 +28,7 @@ double RPN::calculate(double x) {
         else {
             if(current->typeOf() == FUNCTION) {
                 double val = x;
-                if(!math_stack.empty() && static_cast<Function*>(current)->getFun() != "x") { //X is an input variable, so it should always be equal to input
+                if(!math_stack.empty() && static_cast<Function*>(current)->getFun() != "x" && static_cast<Function*>(current)->getFun() != "pi") { //X is an input variable, so it should always be equal to input. Pi is constant
                     val = math_stack.pop(); //This sets other functions, like trig, to the top number in the stack.
                 }
                 math_stack.push(static_cast<Function*>(current)->eval(val));
