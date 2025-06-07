@@ -97,6 +97,7 @@ void animate::update()
     // cause changes to the data for the next frame
     system.Step(command, info); //REMINDER --- YOU NEED THIS! THIS SPECIFICALLY REMEMBER TO UNCOMMENT
     command = 0;
+    sidebar.update();
     if (mouseIn)
     {
         // mousePoint red dot:
@@ -147,17 +148,17 @@ void animate::processEvents()
             switch (keyPressed->code)
             {
             case sf::Keyboard::Key::Left: // SFML 3: sf::Keyboard::Key::Left
-                sidebar[SB_KEY_PRESSED] = "LEFT ARROW";
+                //sidebar[SB_KEY_PRESSED] = "LEFT ARROW";
                 command = 4;
                 system.Step(command, info);
                 break;
             case sf::Keyboard::Key::Right: // SFML 3: sf::Keyboard::Key::Right
-                sidebar[SB_KEY_PRESSED] = "RIGHT ARROW";
+                //sidebar[SB_KEY_PRESSED] = "RIGHT ARROW";
                 command = 6;
                 system.Step(command, info);
                 break;
             case sf::Keyboard::Key::Escape: // SFML 3: sf::Keyboard::Key::Escape
-                sidebar[SB_KEY_PRESSED] = "ESC: EXIT";
+                //sidebar[SB_KEY_PRESSED] = "ESC: EXIT";
                 window.close();
                 break;
             case sf::Keyboard::Key::Equal: //Zooms into the graph

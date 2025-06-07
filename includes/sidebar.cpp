@@ -56,7 +56,7 @@ Sidebar::Sidebar(float left, float width)
     // sb_text.setFont(font); // This is redundant as it was constructed with font.
     sb_text.setCharacterSize(20);
     sb_text.setStyle(sf::Text::Style::Bold); // SFML 3: sf::Text::Style::Bold
-    sb_text.setFillColor(sf::Color::Yellow);
+    sb_text.setFillColor(sf::Color(117, 0, 20));
 
     ////this is how you would position text on screen:
     // sb_text.setPosition(sf::Vector2f(10, SCREEN_HEIGHT-sb_text.getLocalBounds().height-5));
@@ -67,11 +67,29 @@ Sidebar::Sidebar(float left, float width)
     {
         string eq;
         history >> eq;
-        if(eq != "") {
+        if(!eq.empty()) {
             items.push_back(eq);
         }
     }
+    history.close();
     cout << "Sidebar: CTOR: Exit." << endl;
+}
+
+
+void Sidebar::update() {
+    history.open("history.txt");
+    if(history.fail()) {
+        cout << "update failed" << endl;
+        exit(1);
+    }
+    string eq;
+    for(int i = 0; i < items.size()+1; i++) {
+        history >> eq;
+    }
+    if(!eq.empty() && eq != items[items.size()-1]) {
+        items.push_back(eq);
+    }
+    history.close();
 }
 
 void Sidebar::draw(sf::RenderWindow &window)
