@@ -74,6 +74,14 @@ bool test_complex_trig_functions(bool debug = false) {
   if(result2 != sin(1-tan(2.2))) {
     return false;
   }
+
+  Queue<Token*> t4;
+  t4.push(new Function("x"));
+  t4.push(new Operator("^"));
+  t4.push(new Integer(2));
+  t4.push(new Operator("-"));
+  t4.push(new Integer(3));
+
   return true;
 }
 

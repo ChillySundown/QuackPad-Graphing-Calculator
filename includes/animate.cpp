@@ -5,7 +5,7 @@
 
 
 animate::animate()
-    : font(), myTextLabel(font), sidebar(WORK_PANEL, SIDE_BAR)
+    : font(), myTextLabel(font), textBox(), sidebar(WORK_PANEL, SIDE_BAR)
 {
     cout << "animate CTOR: TOP" << endl;
     // SFML 3: VideoMode constructor takes sf::Vector2u or {unsigned int, unsigned int}
@@ -27,6 +27,10 @@ animate::animate()
     // }
     // system = System(container);
     window.setFramerateLimit(60);
+
+    textBox.setSize(sf::Vector2f(SIDE_BAR, 30.f));
+    textBox.setFillColor(sf::Color::Transparent);
+    textBox.setPosition(sf::Vector2f(SCREEN_WIDTH - 300, SCREEN_HEIGHT - 30.f));
 
     //Our goat GraphInfo!!!
     info = new GraphInfo();
@@ -62,25 +66,26 @@ animate::animate()
     // myTextLabel.setFont(font); // Redundant, already constructed with font
     myTextLabel.setCharacterSize(20);
     myTextLabel.setStyle(sf::Text::Style::Bold); // SFML 3: sf::Text::Style::Bold
-    myTextLabel.setFillColor(sf::Color::Green);
+    myTextLabel.setFillColor(sf::Color::Black);
     // assuming .height is correct for SFML 3. Use .f for float literals.
-    myTextLabel.setPosition(sf::Vector2f(10.f, SCREEN_HEIGHT - myTextLabel.getLocalBounds().size.y - 5.f));
+    myTextLabel.setPosition(sf::Vector2f(SCREEN_WIDTH - SIDE_BAR, SCREEN_HEIGHT - myTextLabel.getLocalBounds().size.y - 5.f));
     cout << "animate instantiated successfully." << endl;
 }
 
 void animate::Draw()
 {
     system.Draw(window);
+    window.draw(textBox);
     if (mouseIn)
     {
         window.draw(mousePoint);
     }
+    
     sidebar.draw(window);
     //- - - - - - - - - - - - - - - - - - -
     // getPosition() gives you screen coords, getPosition(window) gives you window coords
     // cout<<"mosue pos: "<<sf::Mouse::getPosition(window).x<<", "<<sf::Mouse::getPosition(window).y<<endl;
     //- - - - - - - - - - - - - - - - - - -
-
     // drawing Test: . . . . . . . . . . . .
     // This is how you draw text:)
     window.draw(myTextLabel);
@@ -156,23 +161,35 @@ void animate::processEvents()
                 window.close();
                 break;
             case sf::Keyboard::Key::Equal: //Zooms into the graph
-                command = 8;
-                system.Step(command, info);
+                if(!info->getInputStatus()) {
+                    command = 8;
+                    system.Step(command, info);
+                }
                 break;
             case sf::Keyboard::Key::Hyphen:
-                command = 9;
-                system.Step(command, info);
+                if(!info->getInputStatus()) {
+                    command = 9;
+                    system.Step(command, info);
+                }
                 break;
-            case sf::Keyboard::Key::Slash:
+            case sf::Keyboard::Key::Backslash:
                 command = 2;
                 info->setInputStatus(true);
-                cout << "should work" << endl;
+                textBox.setFillColor(sf::Color::White);
                 break;
                 //system.Step(command, info);
             case sf::Keyboard::Key::Enter:
                 command = 5;
                 cout << "Submitted!" << endl;
-                info->setInputStatus(false);
+                try {
+                    info->setEquation(input);
+                    input = "";
+                    info->setInputStatus(false);
+                    textBox.setFillColor(sf::Color::Transparent);
+                } catch(exception e) {
+                    input = "Invalid equation";
+                }
+                break;
             default: //For equation input, process it in another function (Crashes when in processEvents)
                 break;
             }
@@ -182,7 +199,7 @@ void animate::processEvents()
                 if(!input.empty() && textEntered->unicode == 8) {
                     input.pop_back();
                 }
-                else if(info->getInputStatus() && !(textEntered->unicode == 8 || textEntered->unicode == 47)) {
+                else if(info->getInputStatus() && !(textEntered->unicode == 8 || textEntered->unicode == 92)) {
                     input += static_cast<char>(textEntered->unicode);
                 }
             }

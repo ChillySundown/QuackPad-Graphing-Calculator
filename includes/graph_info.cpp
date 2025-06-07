@@ -16,7 +16,7 @@ GraphInfo::GraphInfo() { //You need to make polar coords
     _y_min = -5;
     _y_max = 5;
     inputStatus = false;
-    //_q = tokenizer("x^2");
+    _q = tokenizer("x^2-3*x-5");
     //cout << "Tokenized queue = " << _q << endl;
     _points = 300;
     // _window_dimensions = sf::Vector2f(600.f, 600.f);

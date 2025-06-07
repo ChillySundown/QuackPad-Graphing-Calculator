@@ -28,6 +28,7 @@ private:
     sf::Text myTextLabel;               //text to draw on main screen
     bool mouseIn;                       //mouse is in the screen
     Sidebar sidebar;                    //rectangular message sidebar
+    sf::RectangleShape textBox;
     GraphInfo* info;
     string input;
 

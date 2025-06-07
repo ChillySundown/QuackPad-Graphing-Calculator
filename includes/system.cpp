@@ -76,6 +76,7 @@ void System::Step(int command, GraphInfo* g) {
     }
     if(command == 2) {
         g->setInputStatus(true);
+        
         // string eq;
         // cin >> eq;
         //g->setEquation(eq);
