@@ -29,6 +29,7 @@ private:
     bool mouseIn;                       //mouse is in the screen
     Sidebar sidebar;                    //rectangular message sidebar
     GraphInfo* info;
+    string input;
 
 };
 

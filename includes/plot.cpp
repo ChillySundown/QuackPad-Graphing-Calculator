@@ -6,13 +6,13 @@ Plot::Plot() { //Currently using for all testing
 }
 
 Plot::Plot(int xmin, int xmax, Queue<Token*>& t) {
-    ShuntingYard s(t);
-    Queue<Token*> post = s.postfix();
-    RPN r;
-    for(int i = xmin; i <= xmax; i++) {
-        r.set_input(post);
-        _points.push_back(sf::Vector2f(i, r(i)));
-    }
+    // ShuntingYard s(t);
+    // Queue<Token*> post = s.postfix();
+    // RPN r;
+    // for(int i = xmin; i <= xmax; i++) {
+    //     r.set_input(post);
+    //     _points.push_back(sf::Vector2f(i, r(i)));
+    // }
     //translate();
 }
 
@@ -21,23 +21,26 @@ Plot::Plot(GraphInfo* info) {
 }
 
 vector<sf::Vector2f> Plot::operator()() {
-    ShuntingYard yard(_info->get_expression());
-    Queue<Token*> post = yard.postfix();
-    RPN r;
-    float x_max = _info->get_x_max();
-    float x_min = _info->get_x_min();
-    int numPoints = _info->getNumPoints();
-    float inc = (x_max - x_min) / (numPoints-1);
-    for(float i = x_min; i <= x_max; i += inc) {
-        r.set_input(post);
-        try {
-            sf::Vector2f pre_translate = sf::Vector2f(i, r(i));
-            _points.push_back(translate(pre_translate));
-        } catch(exception e) {
+    
+    if(!_info->get_expression().empty()) {
+        ShuntingYard yard(_info->get_expression());
+        Queue<Token*> post = yard.postfix();
+        RPN r;
+        float x_max = _info->get_x_max();
+        float x_min = _info->get_x_min();
+        int numPoints = _info->getNumPoints();
+        float inc = (x_max - x_min) / (numPoints-1);
+        for(float i = x_min; i <= x_max; i += inc) {
+            r.set_input(post);
+            try {
+                sf::Vector2f pre_translate = sf::Vector2f(i, r(i));
+                _points.push_back(translate(pre_translate));
+            } catch(exception e) {
             //Just skip over bro;
-        }
-    }
+            }
+        }   
     //translate();
+    }
     return _points;
 }
 

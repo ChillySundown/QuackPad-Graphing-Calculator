@@ -3,6 +3,7 @@
 #include "token/token.h"
 #include <iostream>
 
+
 animate::animate()
     : font(), myTextLabel(font), sidebar(WORK_PANEL, SIDE_BAR)
 {
@@ -57,7 +58,7 @@ animate::animate()
 
     // myTextLabel is already constructed with font. now set its properties.
     // myTextLabel = sf::Text("Initial String for myTextLabel", font); // This was assignment + wrong constructor
-    myTextLabel.setString("Initial String for myTextLabel");
+    myTextLabel.setString("ACME Graphing Calculator");
     // myTextLabel.setFont(font); // Redundant, already constructed with font
     myTextLabel.setCharacterSize(20);
     myTextLabel.setStyle(sf::Text::Style::Bold); // SFML 3: sf::Text::Style::Bold
@@ -102,6 +103,7 @@ void animate::update()
         // mouse location text for sidebar:
         sidebar[SB_MOUSE_POSITION] = mouse_pos_string(window);
     }
+    myTextLabel.setString(input);
     //info->set_x(0, 10); //WE CAN NOW DYNAMICALLY ALTER THE GRAPH!!!
 
 }
@@ -118,7 +120,6 @@ animate::~animate() { //Destructor for GraphInfo pointer
 
 void animate::processEvents()
 {
-    string input;
     // sf::Event event;
     float mouseX, mouseY;
     // SFML 3: pollEvent returns std::optional<sf::Event>
@@ -135,12 +136,6 @@ void animate::processEvents()
         if (event.is<sf::Event::Closed>())
         {
             window.close();
-        }
-        else if(const auto textEntered = event.getIf<sf::Event::TextEntered>()) {
-            if(textEntered->unicode < 128) {
-             input += static_cast<char>(textEntered->unicode);
-             cout << input << endl;
-            }
         }
         else if (const sf::Event::KeyPressed* keyPressed = event.getIf<sf::Event::KeyPressed>())
         {
@@ -168,8 +163,28 @@ void animate::processEvents()
                 command = 9;
                 system.Step(command, info);
                 break;
+            case sf::Keyboard::Key::Slash:
+                command = 2;
+                info->setInputStatus(true);
+                cout << "should work" << endl;
+                break;
+                //system.Step(command, info);
+            case sf::Keyboard::Key::Enter:
+                command = 5;
+                cout << "Submitted!" << endl;
+                info->setInputStatus(false);
             default: //For equation input, process it in another function (Crashes when in processEvents)
                 break;
+            }
+        }
+        else if(const auto textEntered = event.getIf<sf::Event::TextEntered>()) {
+            if(textEntered->unicode < 128) {
+                if(!input.empty() && textEntered->unicode == 8) {
+                    input.pop_back();
+                }
+                else if(info->getInputStatus() && !(textEntered->unicode == 8 || textEntered->unicode == 47)) {
+                    input += static_cast<char>(textEntered->unicode);
+                }
             }
         } 
         else if (event.is<sf::Event::MouseEntered>())

@@ -15,8 +15,9 @@ GraphInfo::GraphInfo() { //You need to make polar coords
     _x_max = 5;
     _y_min = -5;
     _y_max = 5;
-    _q = tokenizer("arccos(sin(3*pi*(x^2-8)))");
-    cout << "Tokenized queue = " << _q << endl;
+    inputStatus = false;
+    //_q = tokenizer("x^2");
+    //cout << "Tokenized queue = " << _q << endl;
     _points = 300;
     // _window_dimensions = sf::Vector2f(600.f, 600.f);
     // _origin = sf::Vector2f(300.f, 300.f);
@@ -58,6 +59,10 @@ int GraphInfo::getNumPoints() {
     return _points;
 }
 
+bool GraphInfo::getInputStatus() {
+    return inputStatus;
+}
+
 void GraphInfo::set_x(float x_min, float x_max) {
     _x_min = x_min;
     _x_max = x_max;
@@ -65,6 +70,10 @@ void GraphInfo::set_x(float x_min, float x_max) {
 void GraphInfo::set_y(float y_min, float y_max) {
     _y_min = y_min;
     _y_max = y_max;
+}
+
+void GraphInfo::setInputStatus(bool status) {
+    inputStatus = status;
 }
 
 bool bothNumbers(char c1, char c2) {

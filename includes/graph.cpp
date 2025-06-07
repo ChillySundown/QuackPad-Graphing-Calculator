@@ -23,10 +23,13 @@ Graph::Graph(GraphInfo* info) {
 
 void Graph::Draw(sf::RenderWindow& w) {
     w.draw(x_axis);
+
     sf::Vector2f origin = sf::Vector2f(0, 0);
     sf::Vector2f orgin_trans = sf::Vector2f(_plot.translate(origin).x, 0);
     y_axis.setPosition(orgin_trans);
+
     w.draw(y_axis);
+
     vector<sf::Vector2f> v = _plot();
     for(int i = 0; i < v.size(); i++) {
         sf::CircleShape _point(1.f);
