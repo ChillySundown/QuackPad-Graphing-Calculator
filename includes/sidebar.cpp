@@ -4,7 +4,7 @@
 #include <fstream>
 
 Sidebar::Sidebar()
-    : font(), sb_text(font), _left(0.f), _width(0.f) // initialize sb_text, provide defaults for _left, _width
+    : font(), sb_text(font), _left(0.f), _width(0.f), height(10.f) // initialize sb_text, provide defaults for _left, _width
 {
     // this constructor is minimal. if it's actually used,
     // it would likely need to load the font and set up 'rect' as well.
@@ -62,6 +62,7 @@ Sidebar::Sidebar(float left, float width)
     // sb_text.setPosition(sf::Vector2f(10, SCREEN_HEIGHT-sb_text.getLocalBounds().height-5));
 
     items.push_back("sidebar sample text");
+    //items.push_back("CLEAR LIST");
     // Fill the items vector with empty strings so that we can use [] to read them:
     for (int i = 0; i < 30; i++)
     {
@@ -75,6 +76,13 @@ Sidebar::Sidebar(float left, float width)
     cout << "Sidebar: CTOR: Exit." << endl;
 }
 
+void Sidebar::resetItems() {
+    int i = items.size()-1;
+    while(i < 1) {
+        items.pop_back();
+        i--;
+    }
+}
 
 void Sidebar::update() {
     history.open("history.txt");
@@ -83,11 +91,14 @@ void Sidebar::update() {
         exit(1);
     }
     string eq;
-    for(int i = 0; i < items.size()+1; i++) {
+    for(int i = 1; i < items.size()+1; i++) {
         history >> eq;
     }
     if(!eq.empty() && eq != items[items.size()-1]) {
         items.push_back(eq);
+    }
+    else {
+       // resetItems();
     }
     history.close();
 }
@@ -96,10 +107,13 @@ void Sidebar::draw(sf::RenderWindow &window)
 {
     const double VERTICAL_LINE_SPACING = 5.0;
     const double LEFT_MARGIN = 10.0;
+    //update();
+    height = 10.f;
+
+    int index = 0;
 
     window.draw(rect);
-    float height = 10.f; // Use f for float literal
-
+    //float height = 10.f; // Use f for float literal
     for (vector<string>::iterator it = items.begin();
          it != items.end(); it++)
     {
@@ -116,16 +130,18 @@ void Sidebar::draw(sf::RenderWindow &window)
             sb_text.setString(it->c_str());
         }
         sb_text.setPosition(sf::Vector2f(_left + static_cast<float>(LEFT_MARGIN), height));
-    
-
-        if(entryBounds.size() < items.size()) {
-            entryBounds.push_back(sb_text.getGlobalBounds());
-        }
-
         height += sb_text.getLocalBounds().size.y + static_cast<float>(VERTICAL_LINE_SPACING);
+        if(entryBounds.size() < items.size() && index >= entryBounds.size()) {
+                cout << height << endl;
+                cout << "Made more room" << endl;
+                cout << sb_text.getGlobalBounds().position.x << ", " << sb_text.getGlobalBounds().position.y << endl;
+                entryBounds.push_back(sb_text.getGlobalBounds());
+        }
+        index++;
         if (!blank)
             window.draw(sb_text);
     }
+    //cout << "done with for loop" << endl;
 }
 
 vector<sf::FloatRect>& Sidebar::getEntryBounds() {

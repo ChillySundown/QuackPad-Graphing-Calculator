@@ -197,6 +197,8 @@ void animate::processEvents()
                     history << input << "\n";
                     input = "";
 
+                    //sidebar.update();
+
                     info->setInputStatus(false);
                     textBox.setFillColor(sf::Color::Transparent);
                 } catch(exception e) {
@@ -235,21 +237,30 @@ void animate::processEvents()
             mouseY = static_cast<float>(mouseMoved->position.y);
             //cout << history_entries.size() << endl;
             //sf::FloatRect s = history_entries.at(0);
-            for(int i = 0; i < history_entries.size(); i++) {
-                if(history_entries[i].contains(sf::Vector2f(mouseX, mouseY))) {
-                    cout << sidebar[i] << endl;
-                }   
-            }
+            // for(int i = 0; i < history_entries.size(); i++) {
+            //     if(history_entries[i].contains(sf::Vector2f(mouseX, mouseY))) {
+            //         cout << sidebar[i] << endl;
+            //     }   
+            // }
             // do something with it if you need to...
         }
         else if (const sf::Event::MouseButtonReleased* mouseButton = event.getIf<sf::Event::MouseButtonReleased>())
         {
+            vector<sf::FloatRect> history_entries = sidebar.getEntryBounds();
             if (mouseButton->button == sf::Mouse::Button::Left) // SFML 3: sf::Mouse::Button::Right
             {
-                vector<sf::FloatRect> history_entries = sidebar.getEntryBounds();
                 for(int i = 0; i < history_entries.size(); i++) {
-                    cout << mouseX << ", " << mouseY << endl;
-                    if(i != 0 && history_entries[i].contains(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))) {
+                    if/*(history_entries[1].contains(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))) {
+                        cout << "clear it out!" << endl;
+                        history.open("history.txt");
+                        if(history.fail()) {
+                            exit(1);
+                        }
+                        sidebar.resetItems();
+                        break;
+                    }
+                    else if*/(i != 0 && history_entries[i].contains(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))) {
+                        cout << "setting new equation" << endl;
                         info->setEquation(sidebar[i]);
                     }  
                 }

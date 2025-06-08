@@ -16,6 +16,7 @@ public:
     Sidebar(float left, float width);
     void draw(sf::RenderWindow& window);
     vector<sf::FloatRect>& getEntryBounds();
+    void resetItems();
     string& operator [](int index);
     void update();
 private:
@@ -28,6 +29,7 @@ private:
 
     float _left;
     float _width;
+    float height;
 
 };
 
