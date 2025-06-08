@@ -116,11 +116,20 @@ void Sidebar::draw(sf::RenderWindow &window)
             sb_text.setString(it->c_str());
         }
         sb_text.setPosition(sf::Vector2f(_left + static_cast<float>(LEFT_MARGIN), height));
+    
+
+        if(entryBounds.size() < items.size()) {
+            entryBounds.push_back(sb_text.getGlobalBounds());
+        }
 
         height += sb_text.getLocalBounds().size.y + static_cast<float>(VERTICAL_LINE_SPACING);
         if (!blank)
             window.draw(sb_text);
     }
+}
+
+vector<sf::FloatRect>& Sidebar::getEntryBounds() {
+    return entryBounds;
 }
 
 string &Sidebar::operator[](int index)

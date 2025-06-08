@@ -230,16 +230,29 @@ void animate::processEvents()
         }
         else if (const sf::Event::MouseMoved* mouseMoved = event.getIf<sf::Event::MouseMoved>())
         {
+            vector<sf::FloatRect> history_entries = sidebar.getEntryBounds();
             mouseX = static_cast<float>(mouseMoved->position.x); // position is sf::Vector2i
             mouseY = static_cast<float>(mouseMoved->position.y);
+            //cout << history_entries.size() << endl;
+            //sf::FloatRect s = history_entries.at(0);
+            for(int i = 0; i < history_entries.size(); i++) {
+                if(history_entries[i].contains(sf::Vector2f(mouseX, mouseY))) {
+                    cout << sidebar[i] << endl;
+                }   
+            }
             // do something with it if you need to...
         }
         else if (const sf::Event::MouseButtonReleased* mouseButton = event.getIf<sf::Event::MouseButtonReleased>())
         {
-            if (mouseButton->button == sf::Mouse::Button::Right) // SFML 3: sf::Mouse::Button::Right
+            if (mouseButton->button == sf::Mouse::Button::Left) // SFML 3: sf::Mouse::Button::Right
             {
-                sidebar[SB_MOUSE_CLICKED] = "RIGHT CLICK " +
-                                            mouse_pos_string(window);
+                vector<sf::FloatRect> history_entries = sidebar.getEntryBounds();
+                for(int i = 0; i < history_entries.size(); i++) {
+                    cout << mouseX << ", " << mouseY << endl;
+                    if(i != 0 && history_entries[i].contains(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))) {
+                        info->setEquation(sidebar[i]);
+                    }  
+                }
             }
             else // assuming other clicks are left, or check sf::Mouse::Button::Left
             {
