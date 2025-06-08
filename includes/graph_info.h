@@ -34,6 +34,8 @@ class GraphInfo {
         void togglePolar();
         void setInputStatus(bool status);
 
+        void resetEquation();
+
         int getNumPoints();
 
         Queue<Token*>& get_expression();

@@ -250,16 +250,21 @@ void animate::processEvents()
             if (mouseButton->button == sf::Mouse::Button::Left) // SFML 3: sf::Mouse::Button::Right
             {
                 for(int i = 0; i < history_entries.size(); i++) {
-                    if/*(history_entries[1].contains(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))) {
+                    if(history_entries[1].contains(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))) {
                         cout << "clear it out!" << endl;
-                        history.open("history.txt");
-                        if(history.fail()) {
-                            exit(1);
+                        try {
+                            history.open("history.txt");
+                            if(history.fail()) {
+                                exit(1);
+                            }
+                            sidebar.resetItems();
+                            history.close();
+                        } catch(exception e) {
+                            cout << "Don't double click!" << endl;
                         }
-                        sidebar.resetItems();
                         break;
                     }
-                    else if*/(i != 0 && history_entries[i].contains(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))) {
+                    else if(i != 0 && history_entries[i].contains(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))) {
                         cout << "setting new equation" << endl;
                         info->setEquation(sidebar[i]);
                     }  

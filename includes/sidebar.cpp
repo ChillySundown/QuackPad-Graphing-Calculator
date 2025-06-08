@@ -4,7 +4,7 @@
 #include <fstream>
 
 Sidebar::Sidebar()
-    : font(), sb_text(font), _left(0.f), _width(0.f), height(10.f) // initialize sb_text, provide defaults for _left, _width
+    : font(), sb_text(font), _left(0.f), _width(0.f), height(10.f), clearHistory(false) // initialize sb_text, provide defaults for _left, _width
 {
     // this constructor is minimal. if it's actually used,
     // it would likely need to load the font and set up 'rect' as well.
@@ -62,7 +62,7 @@ Sidebar::Sidebar(float left, float width)
     // sb_text.setPosition(sf::Vector2f(10, SCREEN_HEIGHT-sb_text.getLocalBounds().height-5));
 
     items.push_back("sidebar sample text");
-    //items.push_back("CLEAR LIST");
+    items.push_back("CLEAR LIST");
     // Fill the items vector with empty strings so that we can use [] to read them:
     for (int i = 0; i < 30; i++)
     {
@@ -78,7 +78,7 @@ Sidebar::Sidebar(float left, float width)
 
 void Sidebar::resetItems() {
     int i = items.size()-1;
-    while(i < 1) {
+    while(i > 1) {
         items.pop_back();
         i--;
     }
@@ -98,7 +98,7 @@ void Sidebar::update() {
         items.push_back(eq);
     }
     else {
-       // resetItems();
+       //resetItems();
     }
     history.close();
 }

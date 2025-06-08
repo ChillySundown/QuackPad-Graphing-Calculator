@@ -26,6 +26,7 @@ private:
     sf::Font font;                      //used to draw text // Ensure declared before sb_text
     sf::Text sb_text;                   //used to draw strings on the window object
     ifstream history;
+    bool clearHistory;
 
     float _left;
     float _width;
