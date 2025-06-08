@@ -43,7 +43,7 @@
 <br/><br/><br/><br/>
 </pre>
 # testB.cpp output:
-<pre>
+<pre>Darwich_Final_Project_Test.mp4
 <br/><br/><br/><br/>
 </pre>
 
