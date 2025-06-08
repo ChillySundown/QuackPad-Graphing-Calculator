@@ -43,7 +43,10 @@
 <br/><br/><br/><br/>
 </pre>
 # testB.cpp output:
-<pre>Darwich_Final_Project_Test.mp4
+<video controls src="Darwich_Final_Project_Test.mp4" title="Title"></video>
+
+
+<pre>
 <br/><br/><br/><br/>
 </pre>
 
