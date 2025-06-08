@@ -24,12 +24,14 @@ class GraphInfo {
         float get_y_min();
         float get_y_max();
         bool getInputStatus();
+        bool isPolar();
 
         void set_x(float x_min, float x_max);
         void set_y(float y_min, float y_max);
         void setNumPoints(int num);
         void setEquation(string eq);
         void setEquation(Queue<Token*>& t);
+        void togglePolar();
         void setInputStatus(bool status);
 
         int getNumPoints();
@@ -45,6 +47,7 @@ class GraphInfo {
         int _points;
 
         bool inputStatus;
+        bool polar;
         float _max_x_screen;
         float _max_y_screen;
         float _x_min;

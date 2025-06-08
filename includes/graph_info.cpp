@@ -16,9 +16,9 @@ GraphInfo::GraphInfo() { //You need to make polar coords
     _y_min = -5;
     _y_max = 5;
     inputStatus = false;
-    _q = tokenizer("x^2-3*x+4");
+    polar = false;
     //cout << "Tokenized queue = " << _q << endl;
-    _points = 300;
+    _points = 600;
     // _window_dimensions = sf::Vector2f(600.f, 600.f);
     // _origin = sf::Vector2f(300.f, 300.f);
     // _domain = sf::Vector2f(-5.f, 5.f);
@@ -109,6 +109,14 @@ void str_spacer(string& s) {
         // }
         //cout << s << endl;
     }
+}
+
+bool GraphInfo::isPolar() {
+    return polar;
+}
+
+void GraphInfo::togglePolar() {
+    polar = !polar;
 }
 
 //PRECONDITION: EXPRESSION HAS BEEN SPACED OUT

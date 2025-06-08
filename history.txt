@@ -1,8 +1,4 @@
-arctan(x^3)
-sin(1-cos(2*x))
-cos(2*x)
-sin(4*x)
-cos(2*x)
-x^2)
-x+4-2
-arccos(2*x)
+tan(x)
+sin(x^3)/cos(x^2)
+4*tan(2*x)
+cos(4*x)

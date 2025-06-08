@@ -28,9 +28,9 @@ animate::animate()
     // system = System(container);
     window.setFramerateLimit(60);
 
-    textBox.setSize(sf::Vector2f(SIDE_BAR, 30.f));
-    textBox.setFillColor(sf::Color::Green);
-    textBox.setPosition(sf::Vector2f(SCREEN_WIDTH - 300, SCREEN_HEIGHT - 30.f));
+    textBox.setSize(sf::Vector2f(SIDE_BAR + 15.f, 30.f));
+    textBox.setFillColor(sf::Color::Transparent);
+    textBox.setPosition(sf::Vector2f(0.f, SCREEN_HEIGHT - 30.f));
 
     //Our goat GraphInfo!!!
     info = new GraphInfo();
@@ -65,7 +65,7 @@ animate::animate()
     myTextLabel.setString("ACME Graphing Calculator");
     // myTextLabel.setFont(font); // Redundant, already constructed with font
     myTextLabel.setCharacterSize(25);
-    myTextLabel.setStyle(sf::Text::Style::Bold); // SFML 3: sf::Text::Style::Bold
+    myTextLabel.setStyle(sf::Text::Style::Regular); // SFML 3: sf::Text::Style::Bold
     myTextLabel.setFillColor(sf::Color::Black);
     // assuming .height is correct for SFML 3. Use .f for float literals.
     myTextLabel.setPosition(textBox.getPosition());
@@ -175,8 +175,13 @@ void animate::processEvents()
                 break;
             case sf::Keyboard::Key::Backslash:
                 command = 2;
-                info->setInputStatus(true);
-                textBox.setFillColor(sf::Color::White);
+                info->setInputStatus(!info->getInputStatus());
+                if(info->getInputStatus()) {
+                    textBox.setFillColor(sf::Color::White);
+                }
+                else {
+                    textBox.setFillColor(sf::Color::Transparent);
+                }
                 break;
                 //system.Step(command, info);
             case sf::Keyboard::Key::Enter:
@@ -199,6 +204,8 @@ void animate::processEvents()
                 }
                 history.close();
                 break;
+            case sf::Keyboard::Key::P:
+                info->togglePolar();
             default: //For equation input, process it in another function (Crashes when in processEvents)
                 break;
             }
@@ -236,8 +243,8 @@ void animate::processEvents()
             }
             else // assuming other clicks are left, or check sf::Mouse::Button::Left
             {
-                sidebar[SB_MOUSE_CLICKED] = "LEFT CLICK " +
-                                            mouse_pos_string(window);
+                // sidebar[SB_MOUSE_CLICKED] = "LEFT CLICK " +
+                //                             mouse_pos_string(window);
             }
         }
 
