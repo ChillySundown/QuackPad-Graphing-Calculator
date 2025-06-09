@@ -15,8 +15,6 @@ class GraphInfo {
     public:
         GraphInfo();
 
-        GraphInfo(float x_screen, float y_screen, float x_min, float x_max, float y_min, float y_max, Queue<Token*> q);
-
         float get_x_screen();
         float get_y_screen();
         float get_x_min();

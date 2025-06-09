@@ -4,7 +4,7 @@
 #include "rpn/rpn.h"
 #include "shunting_yard/shunting_yard.h"
 #include <cmath>
-#include <vector>
+#include "../includes/vector/vector.h"
 #include "graph_info.h"
 #include <SFML/Graphics.hpp>
 
@@ -20,12 +20,12 @@ class Plot {
 
         void set_info(GraphInfo* info);
 
-        vector<sf::Vector2f> operator()();
+        Vector<sf::Vector2f> operator()();
 
-        vector<sf::Vector2f>& get_points();
+        Vector<sf::Vector2f>& get_points();
 
     private:
-        vector<sf::Vector2f> _points;
+        Vector<sf::Vector2f> _points;
         // Queue<Token*> postfix;
         GraphInfo* _info; //REMINDER YOU NEED A GraphInfo at EVERY LEVEL!!! Use It In Constructor!!!
 

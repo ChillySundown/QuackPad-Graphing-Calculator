@@ -16,3 +16,4 @@ class Constants : public Token {
     private:
         string my_constant;
 };
+#endif

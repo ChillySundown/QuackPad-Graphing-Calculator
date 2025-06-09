@@ -4,6 +4,7 @@
 #include "particle.h"
 #include "plot.h"
 #include "graph_info.h"
+#include "../includes/vector/vector.h"
 #include <SFML/Graphics.hpp>
 
 class Graph {

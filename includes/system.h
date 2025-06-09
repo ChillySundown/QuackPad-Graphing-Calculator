@@ -1,6 +1,6 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
-#include <vector>
+#include "../includes/vector/vector.h"
 #include "particle.h"
 #include "graph_info.h"
 #include "graph.h"

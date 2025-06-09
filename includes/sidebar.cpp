@@ -10,11 +10,10 @@ Sidebar::Sidebar()
     // it would likely need to load the font and set up 'rect' as well.
     // for now, this makes it compile by initializing sb_text.
     std::cout << "Sidebar Default CTOR: Minimal initialization." << std::endl;
-    items.reserve(50);
 
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 30; i++) //initializes items
     {
-        items.push_back("");
+        items += ("");
     }
 }
 
@@ -22,16 +21,16 @@ Sidebar::Sidebar(float left, float width)
     : font(), sb_text(font), _left(left), _width(width) // Initialize sb_text with font
 {
     cout << "Sidebar CTOR: TOP" << endl;
-    items.reserve(50);
 
-    history.open("history.txt");
+    history.open("history.txt"); //Opens history.txt
     if(history.fail()) {
-        cout << "FAILURE IMMINENT" << endl;
-        exit(1);
+        historyMaker.open("history.txt");
+        if(historyMaker.fail())
+            exit(1);
     }
 
     // set up the sidebar rectangle:
-    rect.setFillColor(sf::Color(192, 192, 192)); //(192,192,192)); //silver
+    rect.setFillColor(sf::Color(192, 192, 192));  //silver
     rect.setPosition(sf::Vector2f(left, 0));
     rect.setSize(sf::Vector2f(width, SCREEN_HEIGHT));
     cout << "Sidebar CTOR: about to load font." << endl;
@@ -61,46 +60,53 @@ Sidebar::Sidebar(float left, float width)
     ////this is how you would position text on screen:
     // sb_text.setPosition(sf::Vector2f(10, SCREEN_HEIGHT-sb_text.getLocalBounds().height-5));
 
-    items.push_back("sidebar sample text");
-    items.push_back("CLEAR LIST");
-    // Fill the items vector with empty strings so that we can use [] to read them:
+    items += ("sidebar sample text");
+    items += ("CLEAR LIST"); //Pushes back CLEAR LIST button
+    // Fills the item vector with all the strings in the history.txt file
     for (int i = 0; i < 30; i++)
     {
         string eq;
         history >> eq;
         if(!eq.empty()) {
-            items.push_back(eq);
+            cout << "yeah!" << endl;
+            items += (eq);
         }
     }
     history.close();
     cout << "Sidebar: CTOR: Exit." << endl;
 }
 
-void Sidebar::resetItems() {
+void Sidebar::resetItems() { //Removes all the equations in items
     int i = items.size()-1;
-    while(i > 1) {
+    while(i > 1) { //i must be greater than 1 because there are two items that are never popped: cursor coords and Clear LIst
         items.pop_back();
         i--;
     }
 }
 
-void Sidebar::update() {
-    history.open("history.txt");
+void Sidebar::update() { //Updates items vector whenver new equations are entered
+    int historyLen = 1; //Records lengths of lines in history
+    history.open("history.txt"); //Opens history to read from file
     if(history.fail()) {
         cout << "update failed" << endl;
-        exit(1);
+        historyMaker.open("history.txt");
+        if(historyMaker.fail())
+            exit(1);
     }
     string eq;
-    for(int i = 1; i < items.size()+1; i++) {
-        history >> eq;
+    for(int i = 1; i <= items.size()+1; i++) {
+        history >> eq; //Cycles through all the old equations in history.txt until it lands on the last line
+        historyLen++; //Increments every time we read a function
+        if(history.eof()) //If we are at at the end of the file, break
+            break;
     }
-    if(!eq.empty() && eq != items[items.size()-1]) {
-        items.push_back(eq);
-    }
-    else {
-       //resetItems();
+    if(!eq.empty() && historyLen > items.size()) { 
+        //If the last equation we read is not blank, and if historyLen is longer than items.size(), push back
+        cout << "yeah!" << endl;
+        items += (eq);
     }
     history.close();
+    //close history
 }
 
 void Sidebar::draw(sf::RenderWindow &window)
@@ -110,45 +116,44 @@ void Sidebar::draw(sf::RenderWindow &window)
     //update();
     height = 10.f;
 
-    int index = 0;
+    int index = 0; //Index to increment for number of floatRect
 
     window.draw(rect);
     //float height = 10.f; // Use f for float literal
-    for (vector<string>::iterator it = items.begin();
-         it != items.end(); it++)
+    for (int i = 0; i < items.size(); i++)
     {
         bool blank = false;
-        if (it->length() == 0)
+        if (items[i].size() == 0)
         {
-            // empty rows must be taken into account (getLocalBounds())
-            //     but not drawn
             blank = true;
             sb_text.setString("BLANK");
         }
         else
         {
-            sb_text.setString(it->c_str());
+            sb_text.setString(items[i].c_str());
         }
         sb_text.setPosition(sf::Vector2f(_left + static_cast<float>(LEFT_MARGIN), height));
+
+        //Increments height of where sb_text should be
         height += sb_text.getLocalBounds().size.y + static_cast<float>(VERTICAL_LINE_SPACING);
+
+        //If the number of floatRects are less than the number of string items, and if the index exceeds the size of entryBounds,
+        //We know we need to add a new floatRect
         if(entryBounds.size() < items.size() && index >= entryBounds.size()) {
-                cout << height << endl;
-                cout << "Made more room" << endl;
                 cout << sb_text.getGlobalBounds().position.x << ", " << sb_text.getGlobalBounds().position.y << endl;
-                entryBounds.push_back(sb_text.getGlobalBounds());
+                entryBounds += (sb_text.getGlobalBounds());
         }
         index++;
         if (!blank)
             window.draw(sb_text);
     }
-    //cout << "done with for loop" << endl;
 }
 
-vector<sf::FloatRect>& Sidebar::getEntryBounds() {
+Vector<sf::FloatRect>& Sidebar::getEntryBounds() { //return vector of entryBounds for each floatRect
     return entryBounds;
 }
 
 string &Sidebar::operator[](int index)
 {
-    return items[index];
+    return items.at(index);
 }

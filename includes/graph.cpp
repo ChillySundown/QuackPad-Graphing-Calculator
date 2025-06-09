@@ -108,17 +108,13 @@ void Graph::Draw(sf::RenderWindow& w) {
         w.draw(negative30);
     }
 
-    vector<sf::Vector2f> v = _plot();
+    Vector<sf::Vector2f> v = _plot();
     for(int i = 0; i < v.size(); i++) {
-        // dots[i].position = v[i];
-        // dots[i].color = sf::Color::Green;
         sf::CircleShape _point(1.f);
         _point.setFillColor(sf::Color(0,200,0));
         _point.setPosition(v[i]);
         w.draw(_point);
     }
-    //cout << dots[298].position.x << "," << dots[298].position.y << endl;
-    //w.draw(dots, 299, sf::PrimitiveType::Lines); //Can't print all 300, because vector only has length of 299
 }
 
 void Graph::set_info(GraphInfo* g) {

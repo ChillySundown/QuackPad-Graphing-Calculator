@@ -28,12 +28,14 @@ private:
     int command;                        //command to send to system
     sf::Font font;                      //font to draw on main screen
     sf::Text myTextLabel;               //text to draw on main screen
+    sf::Text myHelpLabel;               //contains info for users
     bool mouseIn;                       //mouse is in the screen
-    sf::RectangleShape textBox;
+    sf::RectangleShape textBox;         //textBox which takes user input
     Sidebar sidebar;                    //rectangular message sidebar
-    GraphInfo* info;
-    string input;
-    ofstream history;
+    GraphInfo* info;                    //Dynamic graphInfo that gets updated
+    string input;                       //User input
+    ofstream history;                   //Writes history to txt file
+    sf::RectangleShape helpTab;         //Box that contains cool helpTab stuff
 
 };
 

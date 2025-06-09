@@ -4,8 +4,6 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
-#include <set>
-#include <vector>
 
 using namespace std;
 
@@ -53,9 +51,10 @@ template <class T>
 void shift_right(T *a, int &size, T* shift_here);
 
 template <class T>
-string array_string(const T *a, int size);              //return array 
-                                                        //  as a string
-int array_size(int* arr); 
+string array_string(const T *a, int size);              //return array //  as a string
+              
+template <class T>
+int array_size(T* arr); 
 
 template<class T>
 void array_init(const T* a , int size, T init_val = T());
@@ -160,6 +159,7 @@ void shift_right(T *a, int &size, T* shift_here) {
     size++;
 }
 
+template <class T>
 int array_size(int* arr) {
     int* w = arr;
     int n = 0;
