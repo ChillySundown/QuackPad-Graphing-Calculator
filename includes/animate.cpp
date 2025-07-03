@@ -9,7 +9,7 @@ animate::animate()
 {
     cout << "animate CTOR: TOP" << endl;
     // SFML 3: VideoMode constructor takes sf::Vector2u or {unsigned int, unsigned int}
-    window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "ACME Graphing Calculator");
+    window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "QuackPad Graphing Calculator");
     // VideoMode class has functions to detect screen size etc.
     // RenderWindow constructor has a third argumnet to set style
     // of the window: resize, fullscreen etc.
