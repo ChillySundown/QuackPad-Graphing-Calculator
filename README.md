@@ -18,7 +18,8 @@ An **interactive, high-performance graphing calculator** built in **C++** with t
 - **Interactive Graph Controls**  
   - **Zoom** and **pan** with precision
   - Persistent input history for rapid recall
-  - Intuitive UI optimized for exploration and experimentation
+  - Toggle button between Polar and Cartesian coordinates (Press P)
+  - Help Tab that lists keystrokes (Press F1)
 
 - **Robust Error Handling**  
   Clearly communicates syntax errors, invalid domains, and other computational issues in real-time.
