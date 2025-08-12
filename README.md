@@ -1,6 +1,6 @@
 # QuackPad Graphing Calculator
 
-An **interactive, high-performance graphing calculator** built in **C++** with the **SFML graphics library** — designed for **real-time rendering** of complex mathematical functions and an intuitive, modern user experience.
+An **intuitive graphing calculator** built in **C++** with the **SFML graphics library** — designed for **real-time rendering** of complex mathematical functions and an intuitive, modern user experience.
 
 ---
 
